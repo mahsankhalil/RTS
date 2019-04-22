@@ -43,15 +43,7 @@ public class CategoryIncomeExpenseFragment extends Fragment {
         viewPager.setAdapter(categoryIncomeExpensePagerAdapter);
         TabLayout tabs = view.findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fab = view.findViewById(R.id.fab);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         return view;
     }
 

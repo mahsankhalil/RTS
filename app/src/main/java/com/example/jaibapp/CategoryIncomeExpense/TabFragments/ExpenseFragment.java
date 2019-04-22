@@ -5,6 +5,8 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +18,7 @@ import com.example.jaibapp.CategoryIncomeExpense.Adapter.CategoryIncomeExpenseAd
 import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.CategoryIncomeExpense.ViewModel.ExpenseViewModel;
 import com.example.jaibapp.R;
-import com.example.jaibapp.Repository.CategoryExpenseRepository;
+import com.example.jaibapp.Repository.CategoryIncomeExpenseRepository.CategoryExpenseRepository;
 
 import java.util.List;
 
@@ -39,6 +41,17 @@ public class ExpenseFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new CategoryIncomeExpenseAdapter(view.getContext());
         recyclerView.setAdapter(adapter);
+
+        FloatingActionButton fab = view.findViewById(R.id.category_expense_add_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+
         return view;
     }
 

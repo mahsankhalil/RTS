@@ -1,4 +1,4 @@
-package com.example.jaibapp.Repository;
+package com.example.jaibapp.Repository.CategoryIncomeExpenseRepository;
 
 import android.arch.lifecycle.MutableLiveData;
 

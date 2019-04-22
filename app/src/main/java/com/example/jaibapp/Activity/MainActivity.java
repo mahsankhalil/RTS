@@ -28,14 +28,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.app_bar_main_toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.app_bar_main_mail_button);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         Fragment fragment = new CategoryIncomeExpenseFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.main_fragment,fragment).commit();
