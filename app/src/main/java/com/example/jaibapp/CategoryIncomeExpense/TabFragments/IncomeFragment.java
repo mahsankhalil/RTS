@@ -1,5 +1,6 @@
 package com.example.jaibapp.CategoryIncomeExpense.TabFragments;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,8 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jaibapp.CategoryIncomeExpense.Adapter.CategoryIncomeExpenseAdapter;
+import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeViewModel;
 import com.example.jaibapp.R;
+import com.example.jaibapp.Repository.CategoryIncomeRepository;
+
+import java.util.List;
 
 public class IncomeFragment extends Fragment {
 
@@ -23,7 +28,7 @@ public class IncomeFragment extends Fragment {
     public static IncomeFragment newInstance() {
         return new IncomeFragment();
     }
-
+    CategoryIncomeExpenseAdapter adapter;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -31,7 +36,7 @@ public class IncomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.category_income_expense_fragment_recycler_view);
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        CategoryIncomeExpenseAdapter adapter = new CategoryIncomeExpenseAdapter(view.getContext());
+        adapter = new CategoryIncomeExpenseAdapter(view.getContext());
         recyclerView.setAdapter(adapter);
         return view;
     }
@@ -39,8 +44,10 @@ public class IncomeFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(IncomeViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(CategoryIncomeRepository.class);
         // TODO: Use the ViewModel
+        MutableLiveData<List<CategoryItem>>list = mViewModel.getAllData();
+        adapter.setValue(list.getValue());
     }
 
 }

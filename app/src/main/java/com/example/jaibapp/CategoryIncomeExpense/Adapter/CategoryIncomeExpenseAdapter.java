@@ -7,13 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.R;
+
+import java.util.List;
 
 public class CategoryIncomeExpenseAdapter extends RecyclerView.Adapter<CategoryIncomeExpenseAdapter.Holder> {
 
-    String[] arr = {"ahsan","Talha","Attiq"};
+    List<CategoryItem> ItemList;
 
     Context context;
 
@@ -32,13 +36,19 @@ public class CategoryIncomeExpenseAdapter extends RecyclerView.Adapter<CategoryI
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int i) {
-        holder.title.setText(arr[i]);
-        holder.image.setImageResource(R.drawable.ic_menu_slideshow);
+        holder.title.setText(ItemList.get(i).getTitle());
+        holder.image.setImageResource(ItemList.get(i).getPictureId());
     }
 
     @Override
     public int getItemCount() {
-        return arr.length;
+        return ItemList.size();
+    }
+
+    public void setValue(List<CategoryItem> categoryItems)
+    {
+        ItemList = categoryItems;
+        notifyDataSetChanged();
     }
 
     public static class Holder extends RecyclerView.ViewHolder{
