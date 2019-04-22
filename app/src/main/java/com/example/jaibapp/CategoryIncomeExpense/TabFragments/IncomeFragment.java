@@ -1,4 +1,4 @@
-package com.example.jaibapp.Fragment;
+package com.example.jaibapp.CategoryIncomeExpense.TabFragments;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -11,24 +11,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.jaibapp.Adapters.CategoryIncomeExpenseAdapter;
+import com.example.jaibapp.CategoryIncomeExpense.Adapter.CategoryIncomeExpenseAdapter;
+import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeViewModel;
 import com.example.jaibapp.R;
 
-public class CategoryIncomeExpenseFragment extends Fragment {
+public class IncomeFragment extends Fragment {
 
-    private CategoryIncomeExpenseViewModel mViewModel;
+    private IncomeViewModel mViewModel;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-
-
-    public static CategoryIncomeExpenseFragment newInstance() {
-        return new CategoryIncomeExpenseFragment();
+    public static IncomeFragment newInstance() {
+        return new IncomeFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.category_income_expense_fragment, container, false);
+        View view = inflater.inflate(R.layout.income_fragment, container, false);
         recyclerView = view.findViewById(R.id.category_income_expense_fragment_recycler_view);
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -40,14 +39,8 @@ public class CategoryIncomeExpenseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(CategoryIncomeExpenseViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(IncomeViewModel.class);
         // TODO: Use the ViewModel
-
-
-
-
-
-
     }
 
 }

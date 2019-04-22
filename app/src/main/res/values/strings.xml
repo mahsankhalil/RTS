@@ -10,4 +10,7 @@
     <string name="title_activity_splash">splashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_category_income_expense">Category</string>
+    <string name="income_title">Income</string>
+    <string name="expense_title">Expense</string>
 </resources>

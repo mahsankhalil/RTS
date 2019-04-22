@@ -1,4 +1,4 @@
-package com.example.jaibapp.Fragment;
+package com.example.jaibapp.CategoryIncomeExpense.ViewModel;
 
 import android.arch.lifecycle.ViewModel;
 

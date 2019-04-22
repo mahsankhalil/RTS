@@ -1,4 +1,4 @@
-package com.example.jaibapp.Adapters;
+package com.example.jaibapp.CategoryIncomeExpense.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

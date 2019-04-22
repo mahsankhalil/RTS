@@ -15,7 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.jaibapp.Fragment.CategoryIncomeExpenseFragment;
+import com.example.jaibapp.CategoryIncomeExpense.Fragment.CategoryIncomeExpenseFragment;
 import com.example.jaibapp.R;
 
 public class MainActivity extends AppCompatActivity
