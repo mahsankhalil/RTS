@@ -46,7 +46,6 @@ public class CategoryIncomeExpenseFragment extends Fragment {
 
         return view;
     }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -59,5 +58,4 @@ public class CategoryIncomeExpenseFragment extends Fragment {
 
 
     }
-
 }
