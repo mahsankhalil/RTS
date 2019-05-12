@@ -32,6 +32,7 @@ public class ExpenseFragment extends Fragment {
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     CategoryIncomeExpenseAdapter adapter;
+
     public static ExpenseFragment newInstance() {
         return new ExpenseFragment();
     }
