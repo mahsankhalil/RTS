@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.jaibapp.CategoryIncomeExpense.Fragment.CategoryIncomeExpenseFragment;
 import com.example.jaibapp.R;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.app_bar_main_toolbar);
         setSupportActionBar(toolbar);
 
+        Toast.makeText(this, "Hello World!", Toast.LENGTH_SHORT).show();
 
         categoryIncomeExpenseFragment = new CategoryIncomeExpenseFragment();
         getSupportFragmentManager().beginTransaction()

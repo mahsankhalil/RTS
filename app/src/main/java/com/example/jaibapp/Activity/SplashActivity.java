@@ -21,10 +21,8 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
         setContentView(R.layout.activity_splash);
+
         Handler handler=new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -33,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },3000);
+        },2000);
 
     }
 
