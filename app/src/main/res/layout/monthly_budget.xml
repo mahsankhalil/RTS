@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="10dp"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/monthly_budget_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Category to Set Monthly Budget"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_marginBottom="10dp"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/monthly_budget_recycler_list"
+        tools:listitem="@layout/monthly_budget_list_item"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
