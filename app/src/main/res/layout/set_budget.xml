@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#eeeeee"
+    android:padding="7dp"
+    >
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/set_budget_item_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_add"
+                android:layout_alignTop="@id/set_budget_item_name"
+                android:layout_alignBottom="@id/set_budget_item_name"
+                />
+
+            <TextView
+                android:layout_marginLeft="2dp"
+                android:id="@+id/set_budget_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grocery"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/set_budget_item_icon"
+                android:textSize="20dp" />
+            <TextView
+                android:id="@+id/set_budget_item_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/set_budget_item_name"
+                android:text="No Budget defined for May 2019" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <view
+        android:layout_width="0dp"
+        android:layout_height="10dp"/>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100"
+
+                >
+                <TextView
+                    android:layout_weight="15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="PKR"
+                    android:textSize="12dp"
+                    android:textColor="@color/colorPrimary"
+                    />
+                <EditText
+                    android:layout_weight="70"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="1500"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:textSize="12dp"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="15"
+                    android:src="@drawable/ic_menu_camera" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
