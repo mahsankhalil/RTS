@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp">
+
+        <TextView
+            android:id="@+id/set_budget_pkr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PKR"
+            android:textColor="@android:color/holo_red_dark"
+            android:fontFamily="@font/segoeui"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:textDirection="rtl"
+            android:id="@+id/set_budget_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="0"
+            android:fontFamily="@font/segoeui"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="5dp"
+            android:layout_toRightOf="@id/set_budget_pkr"
+            android:layout_toLeftOf="@id/set_budget_dial_icon"
+            android:background="@android:color/transparent"/>
+        <ImageView
+            android:id="@+id/set_budget_dial_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_dialpad_black_24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingVertical="13dp"
+        android:paddingHorizontal="10dp">
+
+        <ImageView
+            android:id="@+id/add_expense_calander_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+
+            android:src="@drawable/ic_date_range_black_24dp"/>
+        <EditText
+            android:id="@+id/add_expenese_calander"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/add_expense_calander_image"
+            android:hint="29 May 2019"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:paddingLeft="5dp"
+            />
+
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingVertical="13dp"
+        android:paddingHorizontal="10dp">
+
+        <ImageView
+            android:id="@+id/add_expense_tags_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_more_black_24dp"/>
+        <EditText
+            android:id="@+id/add_expense_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/add_expense_tags_image"
+            android:hint="Tags"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:paddingLeft="5dp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingVertical="13dp"
+        android:paddingHorizontal="10dp">
+
+
+        <TextView
+            android:id="@+id/add_expense_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Select Category"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:paddingLeft="5dp"
+            />
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/add_expense_category_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingVertical="13dp"
+        android:paddingHorizontal="10dp">
+
+        <ImageView
+            android:id="@+id/add_expense_cash_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_account_balance_wallet_black_24dp"/>
+        <EditText
+            android:id="@+id/add_expense_cash_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/add_expense_cash_image"
+            android:hint="Cash"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:paddingLeft="5dp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingVertical="13dp"
+        android:paddingHorizontal="10dp">
+
+        <ImageView
+            android:id="@+id/add_expense_description_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_description_black_24dp"/>
+        <EditText
+            android:id="@+id/add_expence_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/add_expense_description_image"
+            android:hint="Description"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:paddingLeft="5dp"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingVertical="13dp"
+        android:paddingHorizontal="10dp">
+
+        <ImageView
+            android:id="@+id/add_expense_receipt_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_add_a_photo_black_24dp"/>
+        <EditText
+            android:id="@+id/add_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/add_expense_receipt_image"
+            android:hint="Attach Image"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:paddingLeft="5dp"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
