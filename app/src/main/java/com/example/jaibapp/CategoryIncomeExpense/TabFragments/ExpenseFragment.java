@@ -21,7 +21,7 @@ import com.example.jaibapp.CategoryIncomeExpense.Adapter.CategoryIncomeExpenseAd
 import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewModel;
 import com.example.jaibapp.R;
-import com.example.jaibapp.Repository.CategoryIncomeExpenseRepository.CategoryExpenseRepository;
+import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryExpenseRepository;
 
 import java.util.List;
 

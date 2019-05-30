@@ -118,7 +118,10 @@ public class MainActivity extends AppCompatActivity
 
     void changeFragment(Fragment fragment)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment,fragment).addToBackStack(null).commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_fragment,fragment)
+                .addToBackStack(null).commit();
     }
 
 

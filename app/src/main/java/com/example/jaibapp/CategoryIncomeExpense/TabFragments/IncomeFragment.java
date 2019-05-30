@@ -1,8 +1,6 @@
 package com.example.jaibapp.CategoryIncomeExpense.TabFragments;
 
 import android.app.Dialog;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,9 +20,7 @@ import com.example.jaibapp.CategoryIncomeExpense.Adapter.CategoryIncomeExpenseAd
 import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewModel;
 import com.example.jaibapp.R;
-import com.example.jaibapp.Repository.CategoryIncomeExpenseRepository.CategoryIncomeRepository;
-
-import java.util.List;
+import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryIncomeRepository;
 
 public class IncomeFragment extends Fragment {
 
