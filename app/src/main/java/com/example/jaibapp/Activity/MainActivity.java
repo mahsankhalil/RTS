@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.jaibapp.Accounts.Fragments.AccountSourceFragment;
 import com.example.jaibapp.CategoryIncomeExpense.Fragment.CategoryIncomeExpenseFragment;
@@ -21,7 +20,6 @@ import com.example.jaibapp.R;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Fragment categoryIncomeExpenseFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.app_bar_main_toolbar);
         setSupportActionBar(toolbar);
 
-        categoryIncomeExpenseFragment = new CategoryIncomeExpenseFragment();
+        Fragment categoryIncomeExpenseFragment = new CategoryIncomeExpenseFragment();
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_fragment,categoryIncomeExpenseFragment)
                 .addToBackStack(null)
