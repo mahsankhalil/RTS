@@ -2,74 +2,89 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:paddingLeft="10dp"
-            android:paddingStart="10dp"
-            android:paddingBottom="5dp">
-
-            <ImageView
-                android:id="@+id/set_budget_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
-                android:layout_alignBottom="@id/set_budget_category"
-                android:layout_alignTop="@id/set_budget_category"
-                />
-            <TextView
-                android:id="@+id/set_budget_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Category"
-                android:textSize="20dp"
-                android:fontFamily="@font/segoeui"
-                android:textStyle="bold"
-                android:layout_toEndOf="@+id/set_budget_image"
-                android:paddingLeft="5dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:textSize="17sp"
-                android:layout_below="@+id/set_budget_image"
-                android:text="No budget defined for this month"
-                android:fontFamily="@font/segoeui"
-                android:layout_marginTop="5dp"/>
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/set_budget_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        >
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary">
 
-        <RelativeLayout
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
+                android:paddingBottom="5dp">
+
+                <ImageView
+                    android:id="@+id/set_budget_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add"
+                    android:layout_alignBottom="@id/set_budget_category"
+                    android:layout_alignTop="@id/set_budget_category"
+                    />
+                <TextView
+                    android:id="@+id/set_budget_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/segoeui"
+                    android:textStyle="bold"
+                    android:layout_toEndOf="@+id/set_budget_image"
+                    android:layout_toRightOf="@id/set_budget_image"
+                    android:paddingLeft="5dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:textSize="17sp"
+                    android:layout_below="@+id/set_budget_image"
+                    android:text="No budget defined for this month"
+                    android:fontFamily="@font/segoeui"
+                    android:layout_marginTop="5dp"/>
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="5dp">
+            android:layout_marginTop="15dp"
+            >
 
-            <TextView
-                android:id="@+id/set_budget_pkr"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PKR"
-                android:fontFamily="@font/segoeui"
-                android:layout_centerVertical="true"
-                android:textSize="20sp"/>
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="5dp">
+
+                <TextView
+                    android:id="@+id/set_budget_pkr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PKR"
+                    android:fontFamily="@font/segoeui"
+                    android:layout_centerVertical="true"
+                    android:textSize="20sp"/>
 
                 <EditText
                     android:textDirection="rtl"
@@ -85,15 +100,17 @@
                     android:layout_toRightOf="@id/set_budget_pkr"
                     android:layout_toLeftOf="@id/set_budget_dial_icon"
                     android:background="@android:color/transparent"/>
-            <ImageView
-                android:id="@+id/set_budget_dial_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"/>
+                <ImageView
+                    android:id="@+id/set_budget_dial_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"/>
 
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
 
 </LinearLayout>
