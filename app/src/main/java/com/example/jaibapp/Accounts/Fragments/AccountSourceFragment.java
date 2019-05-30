@@ -1,37 +1,55 @@
 package com.example.jaibapp.Accounts.Fragments;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.TextView;
 
+import com.example.jaibapp.Accounts.Adapter.AccountSourceRecyclerAdapter;
+import com.example.jaibapp.Accounts.ViewModel.AccountViewModel;
 import com.example.jaibapp.R;
+import com.example.jaibapp.Repository.Accounts.AccountRepository;
 
 public class AccountSourceFragment extends Fragment {
+    private AccountViewModel mAccountViewModel;
     public static AccountSourceFragment newInstance() {
         return new AccountSourceFragment();
     }
-    String LocalCurrentCurrency = "PKR";
+    String LocalCurrentCurrency = "PKR 1000";
     TextView mLocaleCurrency;
-    TextView mTotalBalance;
-
+    RecyclerView accountRecyclerView;
+    AccountSourceRecyclerAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_source,container,false);
         mLocaleCurrency = view.findViewById(R.id.account_source_currency);
-        mTotalBalance = view.findViewById(R.id.account_source_total_balance);
         mLocaleCurrency.setText(LocalCurrentCurrency);
-        mTotalBalance.setText("1000");
+        accountRecyclerView = view.findViewById(R.id.account_source_recycler_view);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        accountRecyclerView.setLayoutManager(layoutManager);
+        adapter = new AccountSourceRecyclerAdapter(view.getContext());
+        accountRecyclerView.setAdapter(adapter);
+
+
+
+
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mAccountViewModel = ViewModelProviders.of(this).get(AccountRepository.class);
+        adapter.setItemList(mAccountViewModel.getAll().getValue());
+
     }
 }

@@ -20,9 +20,8 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
     private List<AccountListModel> ItemList;
     Context context;
 
-    public AccountSourceRecyclerAdapter(Context context,List<AccountListModel> list)
+    public AccountSourceRecyclerAdapter(Context context)
     {
-        ItemList = list;
         this.context = context;
     }
 

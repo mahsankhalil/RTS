@@ -38,7 +38,7 @@ public class CategoryIncomeExpenseFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_category_income_expense,container,false);
-        CategoryIncomeExpensePagerAdapter categoryIncomeExpensePagerAdapter = new CategoryIncomeExpensePagerAdapter(view.getContext(),getFragmentManager());
+        CategoryIncomeExpensePagerAdapter categoryIncomeExpensePagerAdapter = new CategoryIncomeExpensePagerAdapter(view.getContext(),getChildFragmentManager());
         ViewPager viewPager = view.findViewById(R.id.view_pager);
         viewPager.setAdapter(categoryIncomeExpensePagerAdapter);
         TabLayout tabs = view.findViewById(R.id.tabs);

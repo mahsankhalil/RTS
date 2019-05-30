@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.jaibapp.Accounts.Fragments.AccountSourceFragment;
 import com.example.jaibapp.CategoryIncomeExpense.Fragment.CategoryIncomeExpenseFragment;
 import com.example.jaibapp.R;
 
@@ -28,8 +29,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.app_bar_main_toolbar);
         setSupportActionBar(toolbar);
-
-        Toast.makeText(this, "Hello World!", Toast.LENGTH_SHORT).show();
 
         categoryIncomeExpenseFragment = new CategoryIncomeExpenseFragment();
         getSupportFragmentManager().beginTransaction()
@@ -90,9 +89,9 @@ public class MainActivity extends AppCompatActivity
         }else if (id == R.id.nav_budget) {
 
         }else if (id == R.id.nav_category) {
-            changeFragment(categoryIncomeExpenseFragment);
+            changeFragment(new CategoryIncomeExpenseFragment());
         }else if (id == R.id.nav_account) {
-
+            changeFragment(new AccountSourceFragment());
         }else if (id == R.id.nav_friends) {
 
         }else if (id == R.id.nav_history) {
