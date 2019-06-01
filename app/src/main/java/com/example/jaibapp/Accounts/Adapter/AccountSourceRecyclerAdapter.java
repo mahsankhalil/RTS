@@ -2,6 +2,7 @@ package com.example.jaibapp.Accounts.Adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -65,6 +66,12 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
                         switch (menuItem.getItemId()) {
                             case R.id.account_menu_list_edit:
                                 Toast.makeText(context, "Edit"+holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent();
+                                intent.putExtra("ID",holder.getAdapterPosition());
+                                intent.putExtra("TITLE",holder.mItemTitle.getText().toString());
+                                intent.putExtra("CURRENCY",Double.parseDouble(holder.mCurrentMoney.getText().toString()));
+                                intent.putExtra("PICTURE_ID",Integer.parseInt(holder.))
+
 
                                 return true;
                             case R.id.account_menu_list_unpin:

@@ -44,4 +44,17 @@ public class AccountRepository extends AccountViewModel {
         data.setValue(data.getValue());
         return data;
     }
+
+    @Override
+    public void AddAccount(AccountListModel accountListModel) {
+        if(data == null)
+        {
+            data = new MutableLiveData<>();
+            List<AccountListModel> list = new ArrayList<>();
+            data.setValue(list);
+        }
+        List<AccountListModel> list = data.getValue();
+        list.add(accountListModel);
+        data.setValue(list);
+    }
 }
