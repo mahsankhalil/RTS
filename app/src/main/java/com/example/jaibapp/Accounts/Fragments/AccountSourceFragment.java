@@ -1,6 +1,7 @@
 package com.example.jaibapp.Accounts.Fragments;
 
 import android.app.Dialog;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,10 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jaibapp.Accounts.Adapter.AccountSourceRecyclerAdapter;
+import com.example.jaibapp.Accounts.DTO.AccountListModel;
 import com.example.jaibapp.Accounts.ViewModel.AccountViewModel;
 import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.R;
 import com.example.jaibapp.Repository.Accounts.AccountRepository;
+
+import java.util.List;
 
 public class AccountSourceFragment extends Fragment {
     private AccountViewModel mAccountViewModel;
@@ -41,8 +45,14 @@ public class AccountSourceFragment extends Fragment {
         accountRecyclerView = view.findViewById(R.id.account_source_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         accountRecyclerView.setLayoutManager(layoutManager);
-        adapter = new AccountSourceRecyclerAdapter(view.getContext());
+        mAccountViewModel = ViewModelProviders.of(this).get(AccountRepository.class);
+
+
+        adapter = new AccountSourceRecyclerAdapter(view.getContext(),mAccountViewModel);
+        adapter.setItemList(mAccountViewModel.getAll().getValue());
         accountRecyclerView.setAdapter(adapter);
+
+
 
         FloatingActionButton fab = view.findViewById(R.id.account_source_add_button);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,8 +69,6 @@ public class AccountSourceFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mAccountViewModel = ViewModelProviders.of(this).get(AccountRepository.class);
-        adapter.setItemList(mAccountViewModel.getAll().getValue());
 
     }
 

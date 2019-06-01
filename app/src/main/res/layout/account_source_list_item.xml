@@ -46,10 +46,9 @@
                 android:textSize="20sp"
                 />
 
-        <ImageView
-
+        <Button
             android:id="@+id/account_source_list_item_menu_icon"
-            android:src="@drawable/ic_three_dot_menu"
+            android:background="@drawable/ic_three_dot_menu"
             android:layout_width="30dp"
             android:layout_height="30dp"
             app:layout_constraintRight_toRightOf="parent"

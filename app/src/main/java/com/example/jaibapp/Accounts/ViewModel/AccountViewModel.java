@@ -9,4 +9,6 @@ import java.util.List;
 
 public abstract class AccountViewModel extends ViewModel {
     public abstract MutableLiveData<List<AccountListModel>> getAll();
+    public abstract MutableLiveData<List<AccountListModel>> RemoveByAccountObject(AccountListModel accountListModel);
+
 }
