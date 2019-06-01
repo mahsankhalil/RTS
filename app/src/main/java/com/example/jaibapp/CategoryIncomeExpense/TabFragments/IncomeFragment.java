@@ -1,6 +1,8 @@
 package com.example.jaibapp.CategoryIncomeExpense.TabFragments;
 
 import android.app.Dialog;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +24,8 @@ import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewMode
 import com.example.jaibapp.R;
 import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryIncomeRepository;
 
+import java.util.List;
+
 public class IncomeFragment extends Fragment {
 
     String title;
@@ -30,6 +34,7 @@ public class IncomeFragment extends Fragment {
     private IncomeExpenseViewModel mViewModel;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+
     public static IncomeFragment newInstance() {
         return new IncomeFragment();
     }
@@ -106,6 +111,12 @@ public class IncomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(CategoryIncomeRepository.class);
         // TODO: Use the ViewModel
+        mViewModel.getAllData().observe(this, new Observer<List<CategoryItem>>() {
+            @Override
+            public void onChanged(@Nullable List<CategoryItem> categoryItems) {
+                adapter.setValue(categoryItems);
+            }
+        });
         adapter.setValue(mViewModel.getAllData().getValue());
 
 

@@ -2,6 +2,7 @@ package com.example.jaibapp.CategoryIncomeExpense.TabFragments;
 
 import android.app.Dialog;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewModel;
 import com.example.jaibapp.R;
 import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryExpenseRepository;
+import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryIncomeRepository;
 
 import java.util.List;
 
@@ -98,9 +100,17 @@ public class ExpenseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         mViewModel = ViewModelProviders.of(this).get(CategoryExpenseRepository.class);
-        MutableLiveData<List<CategoryItem>> list = mViewModel.getAllData();
-        adapter.setValue(list.getValue());
+        // TODO: Use the ViewModel
+        mViewModel.getAllData().observe(this, new Observer<List<CategoryItem>>() {
+            @Override
+            public void onChanged(@Nullable List<CategoryItem> categoryItems) {
+                adapter.setValue(categoryItems);
+            }
+        });
+
+        adapter.setValue(mViewModel.getAllData().getValue());
     }
 
 }
