@@ -1,6 +1,7 @@
 package com.example.jaibapp.Accounts.Adapter;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jaibapp.Accounts.AddAccount;
 import com.example.jaibapp.Accounts.DTO.AccountListModel;
 import com.example.jaibapp.Accounts.ViewModel.AccountViewModel;
 import com.example.jaibapp.R;
@@ -66,13 +68,12 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
                         switch (menuItem.getItemId()) {
                             case R.id.account_menu_list_edit:
                                 Toast.makeText(context, "Edit"+holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent();
+                                Intent intent = new Intent(context, AddAccount.class);
                                 intent.putExtra("ID",holder.getAdapterPosition());
                                 intent.putExtra("TITLE",holder.mItemTitle.getText().toString());
                                 intent.putExtra("CURRENCY",Double.parseDouble(holder.mCurrentMoney.getText().toString()));
-                                intent.putExtra("PICTURE_ID",Integer.parseInt(holder.))
-
-
+                                intent.putExtra("PICTURE_ID",ItemList.get(holder.getAdapterPosition()).getPictureId());
+                                ((Activity)context).startActivityForResult(intent,10);
                                 return true;
                             case R.id.account_menu_list_unpin:
                                 Toast.makeText(context, "Unpin", Toast.LENGTH_SHORT).show();
@@ -114,4 +115,6 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
 
         }
     }
+
+
 }
