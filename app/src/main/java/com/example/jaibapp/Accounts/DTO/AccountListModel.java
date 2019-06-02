@@ -5,14 +5,25 @@ public class AccountListModel {
     private int PictureId;
     private Double CurrentCurrency;
     private int Id;
+    private String recordId;
+
 
     public AccountListModel(String title, int pictureId, Double currentCurrency, int Id) {
         Title = title;
         PictureId = pictureId;
         CurrentCurrency = currentCurrency;
         this.Id = Id;
+
     }
 
+    public String getRecordId() {
+        return recordId;
+    }
+
+
+    public void setRecordId(String id) {
+        recordId = id;
+    }
     public int getId() {
         return Id;
     }
