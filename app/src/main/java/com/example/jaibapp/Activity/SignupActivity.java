@@ -45,7 +45,7 @@ public class SignupActivity extends AppCompatActivity {
     private TextView errorField;
     private ProgressDialog progressDialog;
     private SignInButton signInButton;
-    Intent intent = new Intent(this, MainActivity.class);
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class SignupActivity extends AppCompatActivity {
         signInButton = findViewById(R.id.sign_in_button);
 
         signInButton.setSize(SignInButton.SIZE_STANDARD);
-
+        intent = new Intent(this,MainActivity.class );
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -76,7 +76,7 @@ public class SignupActivity extends AppCompatActivity {
         // the GoogleSignInAccount will be non-null.
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if(account != null) {
-            startActivity(intent);
+            this.startActivity(intent);
         }
 
         signInButton.setOnClickListener(new View.OnClickListener() {
@@ -128,13 +128,13 @@ public class SignupActivity extends AppCompatActivity {
                     progressDialog.setMessage("Signing Up");
                     progressDialog.show();
                     doSignUp(email, password);
-                    startActivity(intent);
+
                 }
                 else if(signInFlag){
                     progressDialog.setMessage("Signing In");
                     progressDialog.show();
                     doSignIn(email, password);
-                    startActivity(intent);
+
                 }
             }
         });
@@ -148,7 +148,7 @@ public class SignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("SignIn", "signInWithEmail:success");
-
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.d("signIn", "signInWithEmail:failure", task.getException());
@@ -169,6 +169,7 @@ public class SignupActivity extends AppCompatActivity {
                             //Intent intent = new Intent(this, MainActivity.class);
                             //startActivity(intent);
                             Log.d("Signup", "createUserWithEmail:success");
+                            startActivity(intent);
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(SignupActivity.this, "Done", Toast.LENGTH_SHORT).show();
 
