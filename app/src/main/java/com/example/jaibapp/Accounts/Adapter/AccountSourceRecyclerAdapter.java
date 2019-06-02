@@ -18,20 +18,31 @@ import android.widget.Toast;
 
 import com.example.jaibapp.Accounts.AddAccount;
 import com.example.jaibapp.Accounts.DTO.AccountListModel;
+import com.example.jaibapp.Accounts.Fragments.AccountSourceFragment;
 import com.example.jaibapp.Accounts.ViewModel.AccountViewModel;
 import com.example.jaibapp.R;
 
+import java.net.InterfaceAddress;
 import java.util.List;
 
 public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountSourceRecyclerAdapter.Holder> {
 
+    private CallbackInterface mCallback;
     private AccountViewModel mAccountViewModel;
     private List<AccountListModel> ItemList;
     private Context context;
 
-    public AccountSourceRecyclerAdapter(Context context,AccountViewModel accountViewModel)
+    public interface CallbackInterface{
+
+
+        void onHandleSelection(String title,Double currency,int position,int id);
+    }
+
+
+    public AccountSourceRecyclerAdapter(Context context, AccountViewModel accountViewModel, AccountSourceFragment accountSourceFragment)
     {
         this.context = context;
+        mCallback = accountSourceFragment;
         mAccountViewModel = accountViewModel;
     }
 
@@ -68,12 +79,11 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
                         switch (menuItem.getItemId()) {
                             case R.id.account_menu_list_edit:
                                 Toast.makeText(context, "Edit"+holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(context, AddAccount.class);
-                                intent.putExtra("ID",holder.getAdapterPosition());
-                                intent.putExtra("TITLE",holder.mItemTitle.getText().toString());
-                                intent.putExtra("CURRENCY",Double.parseDouble(holder.mCurrentMoney.getText().toString()));
-                                intent.putExtra("PICTURE_ID",ItemList.get(holder.getAdapterPosition()).getPictureId());
-                                ((Activity)context).startActivityForResult(intent,10);
+                                String title = holder.mItemTitle.getText().toString();
+                                Double currency = Double.parseDouble(holder.mCurrentMoney.getText().toString());
+                                int pictureId = ItemList.get(holder.getAdapterPosition()).getPictureId();
+                                int id = ItemList.get(holder.getAdapterPosition()).getId();
+                                mCallback.onHandleSelection(title,currency,holder.getAdapterPosition(),id);
                                 return true;
                             case R.id.account_menu_list_unpin:
                                 Toast.makeText(context, "Unpin", Toast.LENGTH_SHORT).show();

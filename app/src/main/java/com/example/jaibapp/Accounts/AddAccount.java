@@ -52,15 +52,24 @@ public class AddAccount extends AppCompatActivity {
         mSelectedImage.setImageResource(ImageArray.mThumbIds[0]);
 
         mAccountViewModel = ViewModelProviders.of(this).get(AccountRepository.class);
-
-
-
         mSelectedImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showAlertDialog();
             }
         });
+
+        Intent intent = getIntent();
+        if(intent.hasExtra("ID"))
+        {
+            String title = intent.getStringExtra("TITLE");
+            Double currency = intent.getDoubleExtra("CURRENCY",0);
+            Integer id = intent.getIntExtra("ID",0);
+            Integer position = intent.getIntExtra("POSITION",0);
+            mAccountName.setText(title);
+            mOpeningBalance.setText(currency.toString());
+            mSelectedImage.setImageResource(ImageArray.mThumbIds[position]);
+        }
 
 
     }
@@ -86,12 +95,18 @@ public class AddAccount extends AppCompatActivity {
                 {
                     Toast.makeText(mContext,"Information is Not Complete",Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
+                else {
                     Intent intent = getIntent();
-                    intent.putExtra("title",title);
-                    intent.putExtra("currency",currency);
-                    intent.putExtra("pictureId",mSelectedImageId);
+                    intent.putExtra("title", title);
+                    intent.putExtra("currency", currency);
+                    intent.putExtra("pictureId", mSelectedImageId);
+                    if (intent.hasExtra("ID"))
+                    {
+                        int id = intent.getIntExtra("ID",0);
+                        int Position = intent.getIntExtra("POSITION",0);
+                        intent.putExtra("ID",id);
+                        intent.putExtra("POSITION",Position);
+                    }
                     setResult(RESULT_OK,intent);
                     super.finish();
                 }

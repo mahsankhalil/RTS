@@ -57,4 +57,18 @@ public class AccountRepository extends AccountViewModel {
         list.add(accountListModel);
         data.setValue(list);
     }
+
+    @Override
+    public void EditAccount(AccountListModel accountListModel, int position) {
+        if(position>=0 && data !=null)
+        {
+            List<AccountListModel> list = data.getValue();
+            AccountListModel acc = list.get(position);
+            acc.setId(accountListModel.getId());
+            acc.setPictureId(accountListModel.getPictureId());
+            acc.setCurrentCurrency(accountListModel.getCurrentCurrency());
+            acc.setTitle(accountListModel.getTitle());
+            data.setValue(list);
+        }
+    }
 }

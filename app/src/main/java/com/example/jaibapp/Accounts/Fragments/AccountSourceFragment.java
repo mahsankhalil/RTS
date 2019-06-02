@@ -33,29 +33,38 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
-public class AccountSourceFragment extends Fragment {
+public class AccountSourceFragment extends Fragment implements AccountSourceRecyclerAdapter.CallbackInterface {
     private AccountViewModel mAccountViewModel;
     public static AccountSourceFragment newInstance() {
         return new AccountSourceFragment();
     }
-    String LocalCurrentCurrency = "PKR 1000";
+    String LocalCurrentCurrency = "PKR ";
     TextView mLocaleCurrency;
     RecyclerView accountRecyclerView;
     AccountSourceRecyclerAdapter adapter;
     Context mContext;
 
     final int mRequestCode = 1;
+    final int EditIntentRequestCode = 11;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK && requestCode == mRequestCode && data.hasExtra("title"))
         {
-            Bundle bundle = data.getExtras();
             String title = data.getStringExtra("title");
             int pictureId = data.getIntExtra("pictureId", ImageArray.mThumbIds[0]);
             Double currency = data.getDoubleExtra("currency",0);
             AccountListModel listModel = new AccountListModel(title,pictureId,currency,-1);
             mAccountViewModel.AddAccount(listModel);
+        } else if(resultCode == RESULT_OK && requestCode == EditIntentRequestCode && data.hasExtra("ID")) {
+            Toast.makeText(getContext(),"EDITED",Toast.LENGTH_SHORT).show();
+            String title = data.getStringExtra("title");
+            int pictureId = data.getIntExtra("pictureId", ImageArray.mThumbIds[0]);
+            Double currency = data.getDoubleExtra("currency",0);
+            int id = data.getIntExtra("ID",0);
+            int position = data.getIntExtra("POSITION",0);
+            AccountListModel listModel = new AccountListModel(title,pictureId,currency,id);
+            mAccountViewModel.EditAccount(listModel,position);
         }
     }
 
@@ -64,7 +73,6 @@ public class AccountSourceFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.account_source,container,false);
         mLocaleCurrency = view.findViewById(R.id.account_source_currency);
-        mLocaleCurrency.setText(LocalCurrentCurrency);
         accountRecyclerView = view.findViewById(R.id.account_source_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         accountRecyclerView.setLayoutManager(layoutManager);
@@ -72,14 +80,24 @@ public class AccountSourceFragment extends Fragment {
 
 
 
-        adapter = new AccountSourceRecyclerAdapter(view.getContext(),mAccountViewModel);
-        adapter.setItemList(mAccountViewModel.getAll().getValue());
+        adapter = new AccountSourceRecyclerAdapter(view.getContext(),mAccountViewModel,this);
+        List<AccountListModel> acc = mAccountViewModel.getAll().getValue();
+        adapter.setItemList(acc);
         accountRecyclerView.setAdapter(adapter);
-
+        Double currentCurrency = 0.0;
+        for(int i=0;i<acc.size();i++)
+            currentCurrency+= acc.get(i).getCurrentCurrency();
+        String cur =LocalCurrentCurrency + currentCurrency ;
+        mLocaleCurrency.setText(cur);
         mAccountViewModel.getAll().observe(this, new Observer<List<AccountListModel>>() {
             @Override
             public void onChanged(@Nullable List<AccountListModel> list) {
                 adapter.setItemList(list);
+                Double currentCurrency = 0.0;
+                for(int i=0;i<list.size();i++)
+                    currentCurrency+= list.get(i).getCurrentCurrency();
+                String cur =LocalCurrentCurrency + currentCurrency ;
+                mLocaleCurrency.setText(cur);
             }
         });
 
@@ -89,10 +107,8 @@ public class AccountSourceFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext,"Helll",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), AddAccount.class);
                 startActivityForResult(intent,mRequestCode);
-
             }
         });
 
@@ -101,5 +117,13 @@ public class AccountSourceFragment extends Fragment {
     }
 
 
-
+    @Override
+    public void onHandleSelection(String title,Double currency,int position,int id) {
+        Intent intent = new Intent(getContext(),AddAccount.class);
+        intent.putExtra("ID",id);
+        intent.putExtra("TITLE",title);
+        intent.putExtra("POSITION",position);
+        intent.putExtra("CURRENCY",currency);
+        startActivityForResult(intent,EditIntentRequestCode);
+    }
 }
