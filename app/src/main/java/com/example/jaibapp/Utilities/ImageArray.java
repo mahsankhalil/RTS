@@ -1,4 +1,4 @@
-package com.example.jaibapp.Accounts;
+package com.example.jaibapp.Utilities;
 
 import com.example.jaibapp.R;
 
