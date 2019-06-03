@@ -7,6 +7,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.ConstraintLayout
+        android:clickable="true"
+        android:focusable="true"
         android:id="@+id/account_source_list_item_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

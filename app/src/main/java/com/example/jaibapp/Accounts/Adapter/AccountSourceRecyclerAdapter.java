@@ -1,8 +1,12 @@
 package com.example.jaibapp.Accounts.Adapter;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,21 +18,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jaibapp.Accounts.AddAccount;
 import com.example.jaibapp.Accounts.DTO.AccountListModel;
+import com.example.jaibapp.Accounts.Fragments.AccountSourceFragment;
 import com.example.jaibapp.Accounts.ViewModel.AccountViewModel;
 import com.example.jaibapp.R;
 
+import java.net.InterfaceAddress;
 import java.util.List;
 
 public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountSourceRecyclerAdapter.Holder> {
 
+    private CallbackInterface mCallback;
     private AccountViewModel mAccountViewModel;
     private List<AccountListModel> ItemList;
     private Context context;
 
-    public AccountSourceRecyclerAdapter(Context context,AccountViewModel accountViewModel)
+    public interface CallbackInterface{
+
+
+        void onHandleSelection(String title,Double currency,int position,int id);
+    }
+
+
+    public AccountSourceRecyclerAdapter(Context context, AccountViewModel accountViewModel, AccountSourceFragment accountSourceFragment)
     {
         this.context = context;
+        mCallback = accountSourceFragment;
         mAccountViewModel = accountViewModel;
     }
 
@@ -50,6 +66,18 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
     public void onBindViewHolder(@NonNull final Holder holder, final int i) {
         AccountListModel model = ItemList.get(i);
 
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String title = holder.mItemTitle.getText().toString();
+                Double currency = Double.parseDouble(holder.mCurrentMoney.getText().toString());
+                int id = ItemList.get(holder.getAdapterPosition()).getId();
+                mCallback.onHandleSelection(title,currency,holder.getAdapterPosition(),id);
+
+            }
+        });
+
+
         holder.mItemImage.setImageResource(model.getPictureId());
         holder.mItemTitle.setText(model.getTitle());
         holder.mCurrentMoney.setText(model.getCurrentCurrency().toString());
@@ -64,11 +92,12 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.account_menu_list_edit:
-                                Toast.makeText(context, "Edit"+holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
-
+                                String title = holder.mItemTitle.getText().toString();
+                                Double currency = Double.parseDouble(holder.mCurrentMoney.getText().toString());
+                                int id = ItemList.get(holder.getAdapterPosition()).getId();
+                                mCallback.onHandleSelection(title,currency,holder.getAdapterPosition(),id);
                                 return true;
                             case R.id.account_menu_list_unpin:
-                                Toast.makeText(context, "Unpin", Toast.LENGTH_SHORT).show();
                                 setItemList(mAccountViewModel.RemoveByAccountObject(ItemList.get(holder.getAdapterPosition())).getValue());
                                 return true;
                             case R.id.account_menu_list_Activities:
@@ -95,16 +124,20 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
         TextView mItemTitle;
         TextView mCurrentMoney;
         Button menuButton;
+        ConstraintLayout cardView;
         Holder(@NonNull final View itemView) {
             super(itemView);
             mItemImage = itemView.findViewById(R.id.account_source_list_item_image);
             mItemTitle = itemView.findViewById(R.id.account_source_list_item_title);
             mCurrentMoney = itemView.findViewById(R.id.account_source_list_item_currency);
             menuButton = itemView.findViewById(R.id.account_source_list_item_menu_icon);
-
+            cardView = itemView.findViewById(R.id.account_source_list_item_card_view);
 
 
 
         }
     }
+
+
+
 }
