@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_launcher_192"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginHorizontal="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign in"
+            android:fontFamily="@font/segoeui"
+            android:textSize="35dp"
+            android:textColor="#6ef986"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/signin_txtEmail"
+            android:hint="someone@email.com"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="13dp"
+            android:textSize="15dp"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/textbox_color"
+            android:fontFamily="@font/segoeui"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <EditText
+            android:id="@+id/signin_txtPassword"
+            android:hint="Password"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="13dp"
+            android:textSize="15dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/textbox_color"
+            android:fontFamily="@font/segoeui"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <Button
+            android:id="@+id/signin_btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:background="@drawable/button_color"
+            android:textAllCaps="false"
+            android:fontFamily="@font/segoeui"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:textAlignment="center"
+            android:fontFamily="@font/segoeui"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginVertical="10dp"/>
+
+        <Button
+            android:id="@+id/signin_btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:background="@drawable/button_color"
+            android:textAllCaps="false"
+            android:fontFamily="@font/segoeui"
+            android:layout_marginTop="10dp"/>
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/signin_btnGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+        </com.google.android.gms.common.SignInButton>
+
+    </LinearLayout>
+
+</RelativeLayout>

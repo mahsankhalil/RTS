@@ -93,20 +93,6 @@ public class MainActivity extends AppCompatActivity
             changeFragment(new AccountSourceFragment());
         }else if (id == R.id.nav_friends) {
 
-        }else if (id == R.id.nav_history) {
-
-        }if (id == R.id.nav_camera) {
-
-        }else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = findViewById(R.id.activity_main_drawer_layout);
