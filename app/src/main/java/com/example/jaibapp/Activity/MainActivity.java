@@ -15,10 +15,12 @@ import android.view.MenuItem;
 
 import com.example.jaibapp.Accounts.Fragments.AccountSourceFragment;
 import com.example.jaibapp.CategoryIncomeExpense.Fragment.CategoryIncomeExpenseFragment;
+import com.example.jaibapp.Dashboard.Dashboard;
 import com.example.jaibapp.R;
+import com.example.jaibapp.Utilities.FragmentCommunicator;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements FragmentCommunicator,
+         NavigationView.OnNavigationItemSelectedListener  {
 
 
     @Override
@@ -28,9 +30,10 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.app_bar_main_toolbar);
         setSupportActionBar(toolbar);
 
-        Fragment categoryIncomeExpenseFragment = new CategoryIncomeExpenseFragment();
+        Dashboard dashboard = new Dashboard();
+        dashboard.setFragmentCommunicator(this);
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.main_fragment,categoryIncomeExpenseFragment)
+                .add(R.id.main_fragment,dashboard)
                 .addToBackStack(null)
                 .commit();
 
@@ -81,9 +84,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_dashboard) {
-            // Handle the dashboard action
+            Dashboard dashboard = new Dashboard();
+            dashboard.setFragmentCommunicator(this);
+            changeFragment(dashboard);
         }else if (id == R.id.nav_budget) {
 
         }else if (id == R.id.nav_category) {
@@ -122,5 +126,8 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
+    @Override
+    public void ChangeFragmentCallback(Fragment fragment) {
+        changeFragment(fragment);
+    }
 }

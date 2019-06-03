@@ -29,9 +29,15 @@
         </activity>
         <activity
             android:name=".Accounts.AddAccount"
-            android:label="@string/app_name"
+            android:label="Add Account"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".AddExpense.AddExpenseActivity"
+            android:label="Add Expense"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
 
     </application>
 
