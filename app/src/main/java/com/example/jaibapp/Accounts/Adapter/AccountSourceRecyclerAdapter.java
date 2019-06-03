@@ -37,7 +37,7 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
     public interface CallbackInterface{
 
 
-        void onHandleSelection(String title,Double currency,int position,int id);
+        void onHandleSelection(String title,Double currency,int position,String key);
     }
 
 
@@ -64,15 +64,14 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int i) {
-        AccountListModel model = ItemList.get(i);
+        final AccountListModel model = ItemList.get(i);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = holder.mItemTitle.getText().toString();
                 Double currency = Double.parseDouble(holder.mCurrentMoney.getText().toString());
-                int id = ItemList.get(holder.getAdapterPosition()).getId();
-                mCallback.onHandleSelection(title,currency,holder.getAdapterPosition(),id);
+                mCallback.onHandleSelection(title,currency,holder.getAdapterPosition(),model.getKey());
 
             }
         });
@@ -94,8 +93,7 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
                             case R.id.account_menu_list_edit:
                                 String title = holder.mItemTitle.getText().toString();
                                 Double currency = Double.parseDouble(holder.mCurrentMoney.getText().toString());
-                                int id = ItemList.get(holder.getAdapterPosition()).getId();
-                                mCallback.onHandleSelection(title,currency,holder.getAdapterPosition(),id);
+                                mCallback.onHandleSelection(title,currency,holder.getAdapterPosition(),model.getKey());
                                 return true;
                             case R.id.account_menu_list_unpin:
                                 setItemList(mAccountViewModel.RemoveByAccountObject(ItemList.get(holder.getAdapterPosition())).getValue());
