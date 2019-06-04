@@ -17,26 +17,9 @@ public class AccountRepository extends AccountViewModel {
         {
             data = new MutableLiveData<>();
             List<AccountListModel> list = new ArrayList<>();
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,1));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_dashboard,300.0,2));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,3));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_dashboard,300.0,4));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,1));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_dashboard,300.0,2));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,3));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_dashboard,300.0,4));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,1));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_dashboard,300.0,2));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,3));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_dashboard,300.0,4));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,1));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_dashboard,300.0,2));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,3));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_dashboard,300.0,4));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,1));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_dashboard,300.0,2));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,3));
-            list.add(new AccountListModel("Cash", R.drawable.ic_menu_dashboard,300.0,4));
+            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,"1"));
+            list.add(new AccountListModel("Cash", R.drawable.ic_menu_dashboard,300.0,"2"));
+            list.add(new AccountListModel("Cash", R.drawable.ic_menu_budget,1200.0,"3"));
             data.setValue(list);
         }
         return data;
@@ -74,5 +57,12 @@ public class AccountRepository extends AccountViewModel {
             acc.setTitle(accountListModel.getTitle());
             data.setValue(list);
         }
+    }
+
+    @Override
+    public AccountListModel getAt(int i) {
+        if(data!=null && data.getValue()!=null && i>=0 && i<data.getValue().size())
+            return data.getValue().get(i);
+        return null;
     }
 }

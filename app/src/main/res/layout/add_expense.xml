@@ -87,6 +87,8 @@
 
                     android:src="@drawable/ic_date_range_black_24dp" />
                 <EditText
+                    android:clickable="true"
+                    android:focusable="false"
                     android:id="@+id/add_expense_calender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -130,14 +132,12 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:orientation="vertical"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="13dp">
-
-
                 <TextView
                     android:id="@+id/add_expense_category"
                     android:layout_width="wrap_content"
@@ -147,21 +147,37 @@
                     android:paddingLeft="5dp"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-            </RelativeLayout>
+                <Spinner
+                    android:layout_below="@id/add_expense_category"
+                    android:id="@+id/add_expense_category_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/add_expense_catogory_item_list"/>
+            </LinearLayout>
 
-            <Spinner
-                android:id="@+id/add_expense_category_spinner"
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="13dp">
+            <TextView
+                android:id="@+id/add_expense_account"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                tools:listitem="@layout/add_expense_catogory_item_list"/>
+                android:layout_centerVertical="true"
+                android:hint="Select Account"
+                android:paddingLeft="5dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
             <Spinner
+                android:padding="2dp"
                 android:id="@+id/add_expense_account_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 tools:listitem="@layout/add_expense_account_item_list" />
-
+        </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -180,7 +196,6 @@
                     android:id="@+id/add_expense_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/add_expense_description_image"
@@ -189,38 +204,6 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="13dp">
-
-                <ImageView
-                    android:id="@+id/add_expense_receipt_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_add_a_photo_black_24dp" />
-
-                <TextView
-                    android:id="@+id/add_expense_attach_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/add_expense_receipt_image"
-                    android:layout_toEndOf="@id/add_expense_receipt_image"
-                    android:hint="Attach Image"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    />
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

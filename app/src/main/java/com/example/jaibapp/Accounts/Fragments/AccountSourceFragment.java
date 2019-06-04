@@ -50,14 +50,14 @@ public class AccountSourceFragment extends Fragment implements AccountSourceRecy
             String title = data.getStringExtra("title");
             int pictureId = data.getIntExtra("pictureId", ImageArray.mThumbIds[0]);
             Double currency = data.getDoubleExtra("currency",0);
-            AccountListModel listModel = new AccountListModel(title,pictureId,currency,-1);
+            AccountListModel listModel = new AccountListModel(title,pictureId,currency,"-1");
             mAccountViewModel.AddAccount(listModel);
         } else if(resultCode == RESULT_OK && requestCode == EditIntentRequestCode && data.hasExtra("ID")) {
             Toast.makeText(getContext(),"EDITED",Toast.LENGTH_SHORT).show();
             String title = data.getStringExtra("title");
             int pictureId = data.getIntExtra("pictureId", ImageArray.mThumbIds[0]);
             Double currency = data.getDoubleExtra("currency",0);
-            int id = data.getIntExtra("ID",0);
+            String id = data.getStringExtra("ID");
             int position = data.getIntExtra("POSITION",0);
             AccountListModel listModel = new AccountListModel(title,pictureId,currency,id);
             mAccountViewModel.EditAccount(listModel,position);
@@ -114,7 +114,7 @@ public class AccountSourceFragment extends Fragment implements AccountSourceRecy
 
 
     @Override
-    public void onHandleSelection(String title,Double currency,int position,int id) {
+    public void onHandleSelection(String title,Double currency,int position,String id) {
         Intent intent = new Intent(getContext(),AddAccount.class);
         intent.putExtra("ID",id);
         intent.putExtra("TITLE",title);

@@ -74,13 +74,11 @@ public class AddAccount extends AppCompatActivity {
 
 
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_account_menu,menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -91,7 +89,7 @@ public class AddAccount extends AppCompatActivity {
                 String title = mAccountName.getText().toString();
                 Double currency =  Double.parseDouble(mOpeningBalance.getText().toString());
 
-                AccountListModel model = new AccountListModel(title,mSelectedImageId,currency,-1);
+                AccountListModel model = new AccountListModel(title,mSelectedImageId,currency,"-1");
                 if(title.isEmpty() || currency<0)
                 {
                     Toast.makeText(mContext,"Information is Not Complete",Toast.LENGTH_SHORT).show();
@@ -103,7 +101,7 @@ public class AddAccount extends AppCompatActivity {
                     intent.putExtra("pictureId", mSelectedImageId);
                     if (intent.hasExtra("ID"))
                     {
-                        int id = intent.getIntExtra("ID",0);
+                        String id = intent.getStringExtra("ID");
                         int Position = intent.getIntExtra("POSITION",0);
                         intent.putExtra("ID",id);
                         intent.putExtra("POSITION",Position);

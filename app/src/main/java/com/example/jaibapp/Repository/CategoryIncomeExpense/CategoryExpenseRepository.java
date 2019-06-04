@@ -19,12 +19,12 @@ public class CategoryExpenseRepository extends IncomeExpenseViewModel {
         {
             data = new MutableLiveData<>();
             List<CategoryItem> expenseList = new ArrayList<>();
-            expenseList.add(new CategoryItem("Salary", R.drawable.ic_menu_dashboard));
-            expenseList.add(new CategoryItem("Salary", R.drawable.ic_menu_dashboard));
-            expenseList.add(new CategoryItem("Investment", R.drawable.ic_menu_dashboard));
-            expenseList.add(new CategoryItem("Commission", R.drawable.ic_menu_dashboard));
-            expenseList.add(new CategoryItem("Other Income", R.drawable.ic_menu_dashboard));
-            expenseList.add(new CategoryItem("Pocket Money", R.drawable.ic_menu_dashboard));
+            expenseList.add(new CategoryItem("Salary", R.drawable.ic_menu_dashboard,"1"));
+            expenseList.add(new CategoryItem("Salary", R.drawable.ic_menu_dashboard,"2"));
+            expenseList.add(new CategoryItem("Investment", R.drawable.ic_menu_dashboard,"3"));
+            expenseList.add(new CategoryItem("Commission", R.drawable.ic_menu_dashboard,"4"));
+            expenseList.add(new CategoryItem("Other Income", R.drawable.ic_menu_dashboard,"5"));
+            expenseList.add(new CategoryItem("Pocket Money", R.drawable.ic_menu_dashboard,"6"));
             data.setValue(expenseList);
         }
 
@@ -36,5 +36,12 @@ public class CategoryExpenseRepository extends IncomeExpenseViewModel {
         List<CategoryItem> temp = data.getValue() ;
         temp.add(categoryItem);
         data.setValue(temp);
+    }
+
+    @Override
+    public CategoryItem getAt(int i) {
+        if(data!=null && data.getValue()!=null && i>=0 && i<data.getValue().size())
+            return data.getValue().get(i);
+        return null;
     }
 }

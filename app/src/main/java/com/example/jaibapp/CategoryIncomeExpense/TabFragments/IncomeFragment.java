@@ -83,7 +83,7 @@ public class IncomeFragment extends Fragment {
                 EditText title = view.findViewById(R.id.category_expense_income_add_item_dialog_item_name);
                 String t = title.getText().toString();
 
-                mViewModel.Insert(new CategoryItem(t,R.drawable.ic_menu_budget));
+                mViewModel.Insert(new CategoryItem(t,R.drawable.ic_menu_budget,"-1"));
                 adapter.setValue(mViewModel.getAllData().getValue());
                 Toast.makeText(getActivity(),"Save",Toast.LENGTH_SHORT).show();
                 dialog.dismiss();

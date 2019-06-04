@@ -3,10 +3,19 @@ package com.example.jaibapp.CategoryIncomeExpense.DTO;
 public class CategoryItem {
     private String title;
     private int pictureId;
+    String id;
 
-    public CategoryItem(String title, int pictureId) {
+    public CategoryItem(String title, int pictureId,String id) {
         this.title = title;
         this.pictureId = pictureId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

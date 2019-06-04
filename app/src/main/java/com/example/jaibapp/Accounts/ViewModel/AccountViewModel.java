@@ -12,4 +12,5 @@ public abstract class AccountViewModel extends ViewModel {
     public abstract MutableLiveData<List<AccountListModel>> RemoveByAccountObject(AccountListModel accountListModel);
     public abstract void AddAccount(AccountListModel accountListModel);
     public abstract void EditAccount(AccountListModel accountListModel,int position);
+    public abstract AccountListModel getAt(int i);
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public abstract class IncomeExpenseViewModel extends ViewModel {
     public abstract MutableLiveData<List<CategoryItem>> getAllData();
     public abstract void Insert(CategoryItem categoryItem);
+    public abstract CategoryItem getAt(int i);
 }
