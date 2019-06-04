@@ -17,7 +17,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jaibapp.DTO.UserModel;
 import com.example.jaibapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -84,7 +83,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 if(email.trim().isEmpty() || password.trim().isEmpty()){
                     Toast.makeText(SignupActivity.this, "Email and Password are required.", Toast.LENGTH_LONG).show();
-                } else if(password.equals(confirmPassword)){
+                } else if(!password.equals(confirmPassword)){
                     Toast.makeText(SignupActivity.this, "Password and Confirm Password are not same.", Toast.LENGTH_LONG).show();
                 }else {
                     progressDialog.setMessage("Authenticating...");

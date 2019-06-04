@@ -1,6 +1,7 @@
 package com.example.jaibapp.Activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -10,23 +11,32 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.jaibapp.Accounts.Fragments.AccountSourceFragment;
 import com.example.jaibapp.CategoryIncomeExpense.Fragment.CategoryIncomeExpenseFragment;
 import com.example.jaibapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private FirebaseAuth mAuth;
+    private Toolbar toolbar;
+    TextView profileName;
+    TextView profileEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mAuth = FirebaseAuth.getInstance();
 
-        Toolbar toolbar = findViewById(R.id.app_bar_main_toolbar);
+
+         toolbar = findViewById(R.id.app_bar_main_toolbar);
         setSupportActionBar(toolbar);
 
         Fragment categoryIncomeExpenseFragment = new CategoryIncomeExpenseFragment();
@@ -38,11 +48,22 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.activity_main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.addDrawerListener(toggle);
+
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View navHeader = navigationView.getHeaderView(0);
+        profileName = navHeader.findViewById(R.id.nav_header_main_profile_name);
+        profileEmail = navHeader.findViewById(R.id.nav_header_main_profile_email);
+        String email = mAuth.getCurrentUser().getEmail();
+
+        profileEmail.setText(email);
+
+        profileName.setText(mAuth.getCurrentUser().getDisplayName().toString());
+
     }
 
     @Override
@@ -59,6 +80,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
@@ -93,6 +115,10 @@ public class MainActivity extends AppCompatActivity
             changeFragment(new AccountSourceFragment());
         }else if (id == R.id.nav_friends) {
 
+        }else if (id == R.id.nav_signout) {
+            mAuth.signOut();
+            Intent intent = new Intent(this, SigninActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.activity_main_drawer_layout);
