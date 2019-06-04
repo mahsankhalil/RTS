@@ -10,4 +10,5 @@ import java.util.List;
 public abstract class ReceiptViewModel extends ViewModel {
     public abstract MutableLiveData<List<ReceiptModel>> getAll();
     public abstract void AddReceipt(ReceiptModel receiptModel);
+
 }

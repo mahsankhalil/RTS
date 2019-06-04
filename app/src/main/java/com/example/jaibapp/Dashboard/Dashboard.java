@@ -1,6 +1,7 @@
 package com.example.jaibapp.Dashboard;
 
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,9 @@ import com.example.jaibapp.Accounts.AddAccount;
 import com.example.jaibapp.Accounts.DTO.AccountListModel;
 import com.example.jaibapp.Accounts.Fragments.AccountSourceFragment;
 import com.example.jaibapp.Accounts.ViewModel.AccountViewModel;
+import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
+import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewModel;
+import com.example.jaibapp.Dashboard.Adapter.ReceiptAdapter;
 import com.example.jaibapp.Receipt.ExpenseReceiptActivity;
 import com.example.jaibapp.Receipt.DTO.ReceiptModel;
 import com.example.jaibapp.Receipt.IncomeReceiptActivity;
@@ -30,6 +34,8 @@ import com.example.jaibapp.Receipt.ViewModel.ReceiptViewModel;
 import com.example.jaibapp.Dashboard.Adapter.AccountRecyclerAdapter;
 import com.example.jaibapp.R;
 import com.example.jaibapp.Repository.Accounts.AccountRepository;
+import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryExpenseRepository;
+import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryIncomeRepository;
 import com.example.jaibapp.Repository.Receipt.ExpenseReceiptRepository;
 import com.example.jaibapp.Repository.Receipt.IncomeReceiptRepository;
 import com.example.jaibapp.Utilities.FragmentCommunicator;
@@ -39,7 +45,7 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
-public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBackInterface {
+public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBackInterface, ReceiptAdapter.ReceiptCommunicator {
 
 
     final int ADD_EXPENSE_REQUEST_CODE = 1;
@@ -48,7 +54,15 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
     FloatingActionButton floatingActionButton;
     TextView mAccountCurrentBalance;
     int mAddAccountRequestCode;
+
     AccountRecyclerAdapter mAccountAdapter;
+    ReceiptAdapter mIncomeReceiptAdapter;
+    ReceiptAdapter mExpenseReceiptAdapter;
+
+
+    TextView mIncomeTotalList;
+    TextView mExpenseTotalList;
+
     AccountViewModel mAccountViewModel;
     TextView mAccountSeeMoreBtn;
     FragmentCommunicator communicator;
@@ -57,6 +71,7 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
     TextView mExpenseTotal;
 
     Context mContext;
+
 
 
     ReceiptViewModel mExpenseReceiptViewModel;
@@ -74,6 +89,10 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
         mAccountCurrentBalance = view.findViewById(R.id.dashboard_Accounts_total_amount);
 
         mContext = getContext();
+
+        mIncomeTotalList = view.findViewById(R.id.dashboard_Income_total_amount);
+        mExpenseTotalList = view.findViewById(R.id.dashboard_Expense_total_amount);
+
 
         Double val = 0.0;
         for(int i =0;i<list.size();i++)
@@ -97,6 +116,8 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
         mExpenseReceiptViewModel = ViewModelProviders.of(this).get(ExpenseReceiptRepository.class);
         mIncomeReceiptViewModel = ViewModelProviders.of(this).get(IncomeReceiptRepository.class);
 
+        mIncomeReceiptAdapter = new ReceiptAdapter(mContext,mIncomeReceiptViewModel.getAll().getValue(),this,ReceiptAdapter.INCOME);
+        mExpenseReceiptAdapter = new ReceiptAdapter(mContext,mExpenseReceiptViewModel.getAll().getValue(),this,ReceiptAdapter.EXPENSE);
 
 
 
@@ -107,6 +128,8 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
                 for (int i=0;i<receiptModels.size();i++)
                     sum = sum + receiptModels.get(i).getReceiptAmount();
                 mExpenseTotal.setText(sum.toString());
+                mExpenseTotalList.setText(sum.toString());
+                mExpenseReceiptAdapter.setData(receiptModels);
             }
         });
 
@@ -117,8 +140,12 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
                 for (int i=0;i<receiptModels.size();i++)
                     sum = sum + receiptModels.get(i).getReceiptAmount();
                 mIncomeTotal.setText(sum.toString());
+                mIncomeTotalList.setText(sum.toString());
+                mIncomeReceiptAdapter.setData(receiptModels);
             }
         });
+
+
 
 
 
@@ -148,11 +175,6 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
                         return false;
                     }
                 });
-
-
-
-
-
             }
         });
 
@@ -162,6 +184,7 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(mAccountAdapter);
+
 
         mAccountViewModel.getAll().observe(this, new Observer<List<AccountListModel>>() {
             @Override
@@ -173,6 +196,25 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
                 mAccountCurrentBalance.setText(val.toString());
             }
         });
+
+
+
+        RecyclerView mIncomeRecyclerView = view.findViewById(R.id.dashboard_income_list_recycler_view);
+        RecyclerView mExpenseRecyclerView = view.findViewById(R.id.dashboard_Expense_list_recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(view.getContext());
+        layoutManager1.setOrientation(LinearLayoutManager.VERTICAL);
+        mIncomeRecyclerView.setAdapter(mIncomeReceiptAdapter);
+        mExpenseRecyclerView.setAdapter(mExpenseReceiptAdapter);
+
+        mIncomeRecyclerView.setLayoutManager(layoutManager);
+        mExpenseRecyclerView.setLayoutManager(layoutManager1);
+
+
+
+
+
 
         return view;
     }
@@ -237,5 +279,21 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
             }
 
         }
+    }
+
+    @Override
+    public CategoryItem getCategoryItem(String id,int Mode) {
+        IncomeExpenseViewModel viewModel;
+        if(Mode == ReceiptAdapter.INCOME)
+            viewModel = ViewModelProviders.of(this).get(CategoryIncomeRepository.class);
+        else
+            viewModel = ViewModelProviders.of(this).get(CategoryExpenseRepository.class);
+        return viewModel.getCategoryByID(id);
+    }
+
+    @Override
+    public AccountListModel getAccountItem(String id) {
+        AccountViewModel viewModel = ViewModelProviders.of(this).get(AccountRepository.class);
+        return viewModel.getAccountByID(id);
     }
 }

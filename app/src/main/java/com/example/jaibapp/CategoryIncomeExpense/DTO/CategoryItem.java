@@ -8,6 +8,7 @@ public class CategoryItem {
     public CategoryItem(String title, int pictureId,String id) {
         this.title = title;
         this.pictureId = pictureId;
+        this.id = id;
     }
 
     public String getId() {

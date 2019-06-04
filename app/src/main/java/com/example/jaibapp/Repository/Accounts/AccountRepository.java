@@ -65,4 +65,18 @@ public class AccountRepository extends AccountViewModel {
             return data.getValue().get(i);
         return null;
     }
+
+
+
+    @Override
+    public AccountListModel getAccountByID(String id) {
+        this.getAll();
+        List<AccountListModel> list = data.getValue();
+        for(int i =0;i<list.size();i++)
+        {
+            if(list.get(i).getId().compareTo(id)==0)
+                return list.get(i);
+        }
+        return null;
+    }
 }

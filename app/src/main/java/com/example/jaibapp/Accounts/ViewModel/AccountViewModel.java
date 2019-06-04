@@ -13,4 +13,5 @@ public abstract class AccountViewModel extends ViewModel {
     public abstract void AddAccount(AccountListModel accountListModel);
     public abstract void EditAccount(AccountListModel accountListModel,int position);
     public abstract AccountListModel getAt(int i);
+    public abstract AccountListModel getAccountByID(String id);
 }
