@@ -51,7 +51,7 @@ public class CategoryExpenseRepository extends IncomeExpenseViewModel {
         List<CategoryItem> list = data.getValue();
         for(int i =0;i<list.size();i++)
         {
-            if(list.get(i).getId()==id)
+            if(list.get(i).getId().compareTo(id)==0)
                 return list.get(i);
         }
         return null;

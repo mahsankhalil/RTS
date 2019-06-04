@@ -24,7 +24,6 @@ package com.example.jaibapp.Receipt;
         import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewModel;
         import com.example.jaibapp.R;
         import com.example.jaibapp.Repository.Accounts.AccountRepository;
-        import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryExpenseRepository;
         import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryIncomeRepository;
 
         import java.text.SimpleDateFormat;
