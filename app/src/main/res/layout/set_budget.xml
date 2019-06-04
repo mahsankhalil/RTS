@@ -76,7 +76,7 @@
                 android:paddingHorizontal="5dp">
 
                 <TextView
-                    android:id="@+id/add_expense_currency"
+                    android:id="@+id/add_receipt_currency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PKR"
@@ -87,7 +87,7 @@
                 <EditText
                     android:inputType="number"
                     android:textDirection="rtl"
-                    android:id="@+id/add_expense_amount"
+                    android:id="@+id/add_receipt_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="0"
@@ -96,11 +96,11 @@
                     android:textSize="25dp"
                     android:layout_centerVertical="true"
                     android:layout_marginHorizontal="5dp"
-                    android:layout_toRightOf="@id/add_expense_currency"
-                    android:layout_toLeftOf="@id/add_expense_dial_icon"
+                    android:layout_toRightOf="@id/add_receipt_currency"
+                    android:layout_toLeftOf="@id/add_receipt_dial_icon"
                     android:background="@android:color/transparent"/>
                 <ImageView
-                    android:id="@+id/add_expense_dial_icon"
+                    android:id="@+id/add_receipt_dial_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_add"

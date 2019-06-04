@@ -1,18 +1,18 @@
-package com.example.jaibapp.AddExpense.DTO;
+package com.example.jaibapp.Receipt.DTO;
 
 public class ReceiptModel {
     private String ID;
     private String mCategoryID;
     private String mAccountID;
-    private Double mExpenseAmount;
+    private Double mReceiptAmount;
     private String mDate;
     private String mTags ;
     private String mDescription;
-    public ReceiptModel(String ID, String mCategoryID, String mAccountID, Double mExpenseAmount, String mDate, String mTags, String mDescription) {
+    public ReceiptModel(String ID, String mCategoryID, String mAccountID, Double mReceiptAmount, String mDate, String mTags, String mDescription) {
         this.ID = ID;
         this.mCategoryID = mCategoryID;
         this.mAccountID = mAccountID;
-        this.mExpenseAmount = mExpenseAmount;
+        this.mReceiptAmount = mReceiptAmount;
         this.mDate = mDate;
         this.mTags = mTags;
         this.mDescription = mDescription;
@@ -42,12 +42,12 @@ public class ReceiptModel {
         this.mAccountID = mAccountID;
     }
 
-    public Double getExpenseAmount() {
-        return mExpenseAmount;
+    public Double getReceiptAmount() {
+        return mReceiptAmount;
     }
 
-    public void setExpenseAmount(Double mExpenseAmount) {
-        this.mExpenseAmount = mExpenseAmount;
+    public void setReceiptAmount(Double mReceiptAmount) {
+        this.mReceiptAmount = mReceiptAmount;
     }
 
     public String getDate() {

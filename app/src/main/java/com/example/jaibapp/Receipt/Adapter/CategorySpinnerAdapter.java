@@ -1,4 +1,4 @@
-package com.example.jaibapp.AddExpense.Adapter;
+package com.example.jaibapp.Receipt.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,21 +8,19 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.jaibapp.Accounts.DTO.AccountListModel;
 import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.R;
 import com.example.jaibapp.Utilities.ImageArray;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
-public class AccountSpinnerAdapter  extends BaseAdapter {
+public class CategorySpinnerAdapter  extends BaseAdapter {
 
     private Context mContext;
-    private List<AccountListModel> mData;
+    private List<CategoryItem> mData;
     private LayoutInflater mLayoutInflator;
 
-    public AccountSpinnerAdapter(Context mContext, List<AccountListModel> mData) {
+    public CategorySpinnerAdapter(Context mContext, List<CategoryItem> mData) {
         this.mContext = mContext;
         this.mData = mData;
         mLayoutInflator = LayoutInflater.from(mContext);
@@ -46,16 +44,12 @@ public class AccountSpinnerAdapter  extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view==null)
-            view = mLayoutInflator.inflate(R.layout.add_expense_account_item_list,viewGroup,false);
-        ImageView img = view.findViewById(R.id.add_expense_account_list_item_image);
-        TextView txt = view.findViewById(R.id.add_expense_account_list_item_currency);
-        TextView title = view.findViewById(R.id.add_expense_account_list_item_title);
+            view = mLayoutInflator.inflate(R.layout.add_receipt_catogory_item_list,viewGroup,false);
+        ImageView img = view.findViewById(R.id.add_receipt_category_list_item_image);
+        TextView txt = view.findViewById(R.id.add_receipt_category_list_item_title);
 
-
-        txt.setText(mData.get(i).getCurrentCurrency().toString());
         img.setImageResource(ImageArray.mThumbIds[i]);
-        title.setText(mData.get(i).getTitle());
+        txt.setText(mData.get(i).getTitle());
         return view;
     }
 }
-

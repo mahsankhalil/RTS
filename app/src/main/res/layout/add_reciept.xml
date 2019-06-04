@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AddExpense.AddExpenseActivity">
+    tools:context=".Receipt.ExpenseReceiptActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:background="@color/colorAccent">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/add_expense_toolbar"
+            android:id="@+id/add_receipt_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -37,7 +37,7 @@
                 android:paddingVertical="10dp">
 
                 <TextView
-                    android:id="@+id/add_expense_currency"
+                    android:id="@+id/add_receipt_currency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -47,13 +47,13 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/add_expense_amount"
+                    android:id="@+id/add_receipt_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginHorizontal="5dp"
-                    android:layout_toLeftOf="@id/add_expense_dial_icon"
-                    android:layout_toRightOf="@id/add_expense_currency"
+                    android:layout_toLeftOf="@id/add_receipt_dial_icon"
+                    android:layout_toRightOf="@id/add_receipt_currency"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/segoeui"
                     android:hint="0"
@@ -62,11 +62,11 @@
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/add_expense_dial_icon"
+                    android:id="@+id/add_receipt_dial_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/add_expense_amount"
-                    android:layout_alignBottom="@id/add_expense_amount"
+                    android:layout_alignTop="@id/add_receipt_amount"
+                    android:layout_alignBottom="@id/add_receipt_amount"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/ic_dialpad_black_24dp" />
 
@@ -80,7 +80,7 @@
                 android:paddingVertical="13dp">
 
                 <ImageView
-                    android:id="@+id/add_expense_calender_image"
+                    android:id="@+id/add_receipt_calender_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -89,12 +89,12 @@
                 <EditText
                     android:clickable="true"
                     android:focusable="false"
-                    android:id="@+id/add_expense_calender"
+                    android:id="@+id/add_receipt_calender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/add_expense_calender_image"
+                    android:layout_toRightOf="@+id/add_receipt_calender_image"
                     android:hint="29 May 2019"
                     android:inputType="date"
                     android:paddingLeft="5dp"
@@ -112,20 +112,20 @@
                 android:paddingVertical="13dp">
 
                 <ImageView
-                    android:id="@+id/add_expense_tags_image"
+                    android:id="@+id/add_receipt_tags_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_more_black_24dp" />
 
                 <EditText
-                    android:id="@+id/add_expense_tags"
+                    android:id="@+id/add_receipt_tags"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/add_expense_tags_image"
+                    android:layout_toRightOf="@+id/add_receipt_tags_image"
                     android:hint="Tags"
                     android:paddingLeft="5dp"
                     android:textSize="20sp"
@@ -139,7 +139,7 @@
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="13dp">
                 <TextView
-                    android:id="@+id/add_expense_category"
+                    android:id="@+id/add_receipt_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -148,11 +148,11 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
                 <Spinner
-                    android:layout_below="@id/add_expense_category"
-                    android:id="@+id/add_expense_category_spinner"
+                    android:layout_below="@id/add_receipt_category"
+                    android:id="@+id/add_receipt_category_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/add_expense_catogory_item_list"/>
+                    tools:listitem="@layout/add_receipt_catogory_item_list"/>
             </LinearLayout>
 
         <LinearLayout
@@ -162,7 +162,7 @@
             android:paddingHorizontal="10dp"
             android:paddingVertical="13dp">
             <TextView
-                android:id="@+id/add_expense_account"
+                android:id="@+id/add_receipt_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -172,11 +172,11 @@
                 android:textStyle="bold" />
             <Spinner
                 android:padding="2dp"
-                android:id="@+id/add_expense_account_spinner"
+                android:id="@+id/add_receipt_account_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                tools:listitem="@layout/add_expense_account_item_list" />
+                tools:listitem="@layout/add_receipt_account_item_list" />
         </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -186,19 +186,19 @@
                 android:paddingVertical="13dp">
 
                 <ImageView
-                    android:id="@+id/add_expense_description_image"
+                    android:id="@+id/add_receipt_description_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_description_black_24dp" />
 
                 <EditText
-                    android:id="@+id/add_expense_description"
+                    android:id="@+id/add_receipt_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/add_expense_description_image"
+                    android:layout_toRightOf="@+id/add_receipt_description_image"
                     android:hint="Description"
                     android:paddingLeft="5dp"
                     android:textSize="20sp"

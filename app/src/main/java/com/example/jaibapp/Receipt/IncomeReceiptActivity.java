@@ -1,43 +1,39 @@
-package com.example.jaibapp.AddExpense;
+package com.example.jaibapp.Receipt;
+        import android.app.DatePickerDialog;
+        import android.arch.lifecycle.ViewModelProviders;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.support.annotation.Nullable;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.widget.Toolbar;
+        import android.view.Menu;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.widget.AdapterView;
+        import android.widget.DatePicker;
+        import android.widget.EditText;
+        import android.widget.Spinner;
+        import android.widget.TextView;
 
-import android.app.DatePickerDialog;
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+        import com.example.jaibapp.Accounts.DTO.AccountListModel;
+        import com.example.jaibapp.Accounts.ViewModel.AccountViewModel;
+        import com.example.jaibapp.Receipt.Adapter.AccountSpinnerAdapter;
+        import com.example.jaibapp.Receipt.Adapter.CategorySpinnerAdapter;
+        import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
+        import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewModel;
+        import com.example.jaibapp.R;
+        import com.example.jaibapp.Repository.Accounts.AccountRepository;
+        import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryExpenseRepository;
+        import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryIncomeRepository;
 
-import com.example.jaibapp.Accounts.DTO.AccountListModel;
-import com.example.jaibapp.Accounts.ViewModel.AccountViewModel;
-import com.example.jaibapp.AddExpense.Adapter.AccountSpinnerAdapter;
-import com.example.jaibapp.AddExpense.Adapter.CategorySpinnerAdapter;
-import com.example.jaibapp.AddExpense.DTO.ReceiptModel;
-import com.example.jaibapp.AddExpense.ViewModel.RecieptViewModel;
-import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
-import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewModel;
-import com.example.jaibapp.R;
-import com.example.jaibapp.Repository.Accounts.AccountRepository;
-import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryExpenseRepository;
-import com.example.jaibapp.Repository.Receipt.ExpenseRepository;
+        import java.text.SimpleDateFormat;
+        import java.util.Calendar;
+        import java.util.Date;
+        import java.util.List;
+        import java.util.Locale;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-public class AddExpenseActivity extends AppCompatActivity  {
+public class IncomeReceiptActivity  extends AppCompatActivity {
 
 
 
@@ -53,9 +49,9 @@ public class AddExpenseActivity extends AppCompatActivity  {
 
     Context mContext;
     TextView mLocaleCurrency;
-    EditText mExpenseAmount;
-    EditText mExpenseDate;
-    EditText mExpenseTags;
+    EditText mIncomeAmount;
+    EditText mIncomeDate;
+    EditText mIncomeTags;
     EditText mDescription;
 
     Spinner mCategorySpinner;
@@ -70,29 +66,26 @@ public class AddExpenseActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_expense);
-        Toolbar toolbar = findViewById(R.id.add_expense_toolbar);
+        setContentView(R.layout.add_reciept);
+        Toolbar toolbar = findViewById(R.id.add_receipt_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mContext = getApplicationContext();
 
-
-
-
-        mLocaleCurrency = findViewById(R.id.add_expense_currency);
+        mLocaleCurrency = findViewById(R.id.add_receipt_currency);
         mLocaleCurrency.setText(mLocalCurrencyStr);
 
-        mExpenseAmount = findViewById(R.id.add_expense_amount);
-        mExpenseDate = findViewById(R.id.add_expense_calender);
-        mExpenseTags = findViewById(R.id.add_expense_tags);
-        mDescription = findViewById(R.id.add_expense_description);
+        mIncomeAmount = findViewById(R.id.add_receipt_amount);
+        mIncomeDate = findViewById(R.id.add_receipt_calender);
+        mIncomeTags = findViewById(R.id.add_receipt_tags);
+        mDescription = findViewById(R.id.add_receipt_description);
 
-        mAccountSpinner = findViewById(R.id.add_expense_account_spinner);
-        mCategorySpinner = findViewById(R.id.add_expense_category_spinner);
+        mAccountSpinner = findViewById(R.id.add_receipt_account_spinner);
+        mCategorySpinner = findViewById(R.id.add_receipt_category_spinner);
 
         mAccountViewModel = ViewModelProviders.of(this).get(AccountRepository.class);
-        mCategoryIncomeExpenseViewModel = ViewModelProviders.of(this).get(CategoryExpenseRepository.class);
+        mCategoryIncomeExpenseViewModel = ViewModelProviders.of(this).get(CategoryIncomeRepository.class);
 
 
         List<CategoryItem> categoryItems = mCategoryIncomeExpenseViewModel.getAllData().getValue();
@@ -147,12 +140,12 @@ public class AddExpenseActivity extends AppCompatActivity  {
 
 
 
-        mExpenseDate.setOnClickListener(new View.OnClickListener() {
+        mIncomeDate.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(AddExpenseActivity.this, date, myCalendar
+                new DatePickerDialog(IncomeReceiptActivity .this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -163,7 +156,7 @@ public class AddExpenseActivity extends AppCompatActivity  {
         Date d = new Date();
         String myFormat = "dd-MMM-yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        mExpenseDate.setText(sdf.format(myCalendar.getTime()));
+        mIncomeDate.setText(sdf.format(myCalendar.getTime()));
 
     }
 
@@ -171,12 +164,12 @@ public class AddExpenseActivity extends AppCompatActivity  {
         String myFormat = "dd-MMM-yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        mExpenseDate.setText(sdf.format(myCalendar.getTime()));
+        mIncomeDate.setText(sdf.format(myCalendar.getTime()));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add_expense_menu,menu);
+        getMenuInflater().inflate(R.menu.add_receipt_menu,menu);
         return true;
     }
 
@@ -186,10 +179,10 @@ public class AddExpenseActivity extends AppCompatActivity  {
             case android.R.id.home:
                 super.onBackPressed();
                 break;
-            case R.id.add_expense_menu_accept:
-                Double expenseAmount = Double.parseDouble(mExpenseAmount.getText().toString());
-                String selectedDate =  mExpenseDate.getText().toString();
-                String tags =  mExpenseTags.getText().toString();
+            case R.id.add_receipt_menu_accept:
+                Double IncomeAmount = Double.parseDouble(mIncomeAmount.getText().toString());
+                String selectedDate =  mIncomeDate.getText().toString();
+                String tags =  mIncomeTags.getText().toString();
                 String description = mDescription.getText().toString();
                 AccountListModel accountModel = mAccountViewModel.getAt(mAccountPosition);
                 CategoryItem categoryItem = mCategoryIncomeExpenseViewModel.getAt(mCategoryPosition);
@@ -200,7 +193,7 @@ public class AddExpenseActivity extends AppCompatActivity  {
                 {
                     intent.putExtra("ID",intent.getStringExtra("ID"));
                 }
-                intent.putExtra("EXPENSE_AMOUNT",expenseAmount);
+                intent.putExtra("INCOME_AMOUNT",IncomeAmount);
                 intent.putExtra("SELECTED_DATE",selectedDate);
                 intent.putExtra("TAGS",tags);
                 intent.putExtra("DESCRIPTION",description);
@@ -216,3 +209,4 @@ public class AddExpenseActivity extends AppCompatActivity  {
 
 
 }
+

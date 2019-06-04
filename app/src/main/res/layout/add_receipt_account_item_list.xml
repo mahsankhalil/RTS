@@ -14,23 +14,23 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:id="@+id/add_expense_account_list_item_image"
+            android:id="@+id/add_receipt_account_list_item_image"
             android:layout_width="30dp"
             android:src="@drawable/ic_menu_camera"
             android:layout_height="30dp" />
 
         <TextView
-            android:id="@+id/add_expense_account_list_item_title"
+            android:id="@+id/add_receipt_account_list_item_title"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginLeft="10dp"
             android:text="Accounts"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/add_expense_account_list_item_image"
+            app:layout_constraintLeft_toRightOf="@id/add_receipt_account_list_item_image"
             app:layout_constraintTop_toTopOf="parent" />
         <TextView
-            android:id="@+id/add_expense_account_list_item_currency"
+            android:id="@+id/add_receipt_account_list_item_currency"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"

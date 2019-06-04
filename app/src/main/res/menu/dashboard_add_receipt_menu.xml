@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/dashboard_add_receipt_income_btn"
+        android:title="Add Income"
+        />
+    <item android:id="@+id/dashboard_add_receipt_expense_btn"
+        android:title="Add Expense"
+        />
+
+</menu>

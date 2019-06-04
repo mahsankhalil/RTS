@@ -33,8 +33,13 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".AddExpense.AddExpenseActivity"
+            android:name=".Receipt.ExpenseReceiptActivity"
             android:label="Add Expense"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Receipt.IncomeReceiptActivity"
+            android:label="Add Income"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
