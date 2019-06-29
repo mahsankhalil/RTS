@@ -1,9 +1,12 @@
 package com.example.jaibapp.Accounts.Adapter;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,11 +18,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jaibapp.Accounts.AddAccount;
 import com.example.jaibapp.Accounts.DTO.AccountListModel;
 import com.example.jaibapp.Accounts.Fragments.AccountSourceFragment;
 import com.example.jaibapp.Accounts.ViewModel.AccountViewModel;
 import com.example.jaibapp.R;
 
+import java.net.InterfaceAddress;
 import java.util.List;
 
 public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountSourceRecyclerAdapter.Holder> {
@@ -32,7 +37,7 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
     public interface CallbackInterface{
 
 
-        void onHandleSelection(String title,Double currency,int position,String id);
+        void onHandleSelection(String title,Double currency,int position,String key);
     }
 
 
@@ -59,14 +64,14 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
 
     @Override
     public void onBindViewHolder(@NonNull final Holder holder, final int i) {
-        AccountListModel model = ItemList.get(i);
+        final AccountListModel model = ItemList.get(i);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String title = holder.mItemTitle.getText().toString();
                 Double currency = Double.parseDouble(holder.mCurrentMoney.getText().toString());
-                String id = ItemList.get(holder.getAdapterPosition()).getId();
+                int id = ItemList.get(holder.getAdapterPosition()).getId();
                 mCallback.onHandleSelection(title,currency,holder.getAdapterPosition(),id);
 
             }
@@ -89,7 +94,7 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
                             case R.id.account_menu_list_edit:
                                 String title = holder.mItemTitle.getText().toString();
                                 Double currency = Double.parseDouble(holder.mCurrentMoney.getText().toString());
-                                String id = ItemList.get(holder.getAdapterPosition()).getId();
+                                int id = ItemList.get(holder.getAdapterPosition()).getId();
                                 mCallback.onHandleSelection(title,currency,holder.getAdapterPosition(),id);
                                 return true;
                             case R.id.account_menu_list_unpin:

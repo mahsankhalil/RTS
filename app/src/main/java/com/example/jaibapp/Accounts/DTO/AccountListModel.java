@@ -4,22 +4,26 @@ public class AccountListModel {
     private String Title;
     private int PictureId;
     private Double CurrentCurrency;
-    private String Id;
+    private String key;
 
-    public AccountListModel(String title, int pictureId, Double currentCurrency, String Id) {
+
+    public AccountListModel(String title, int pictureId, Double currentCurrency, String key) {
         Title = title;
         PictureId = pictureId;
         CurrentCurrency = currentCurrency;
-        this.Id = Id;
+        this.key = key;
+
     }
 
-    public String getId() {
-        return Id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(String id) {
-        Id = id;
+
+    public void setKey(String key) {
+        this.key = key;
     }
+
 
     public String getTitle() {
         return Title;

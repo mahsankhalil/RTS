@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.example.jaibapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -18,20 +20,31 @@ import com.example.jaibapp.R;
  */
 public class SplashActivity extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        mAuth = FirebaseAuth.getInstance();
+
         Handler handler=new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(SplashActivity.this,MainActivity.class);
+
+                Intent intent=new Intent(SplashActivity.this,SigninActivity.class);
+
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null) {
+                    intent=new Intent(SplashActivity.this,MainActivity.class);
+                }
+
                 startActivity(intent);
                 finish();
             }
-        },1500);
+        },1000);
 
     }
 
@@ -39,6 +52,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
     }
 
 

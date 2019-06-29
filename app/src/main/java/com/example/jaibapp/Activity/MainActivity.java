@@ -1,6 +1,7 @@
 package com.example.jaibapp.Activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -10,41 +11,60 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.jaibapp.Accounts.Fragments.AccountSourceFragment;
 import com.example.jaibapp.CategoryIncomeExpense.Fragment.CategoryIncomeExpenseFragment;
 import com.example.jaibapp.Dashboard.Dashboard;
 import com.example.jaibapp.R;
-import com.example.jaibapp.Utilities.FragmentCommunicator;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements FragmentCommunicator,
-         NavigationView.OnNavigationItemSelectedListener  {
-
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+    private FirebaseAuth mAuth;
+    private Toolbar toolbar;
+    TextView profileName;
+    TextView profileEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.app_bar_main_toolbar);
+        mAuth = FirebaseAuth.getInstance();
+
+
+         toolbar = findViewById(R.id.app_bar_main_toolbar);
         setSupportActionBar(toolbar);
 
-        Dashboard dashboard = new Dashboard();
-        dashboard.setFragmentCommunicator(this);
+        Fragment categoryIncomeExpenseFragment = new CategoryIncomeExpenseFragment();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.main_fragment,dashboard)
+                .add(R.id.main_fragment,categoryIncomeExpenseFragment)
                 .addToBackStack(null)
                 .commit();
 
         DrawerLayout drawer = findViewById(R.id.activity_main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.addDrawerListener(toggle);
+
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View navHeader = navigationView.getHeaderView(0);
+        profileName = navHeader.findViewById(R.id.nav_header_main_profile_name);
+        profileEmail = navHeader.findViewById(R.id.nav_header_main_profile_email);
+        String email = mAuth.getCurrentUser().getEmail();
+
+        profileEmail.setText(email);
+
+        profileName.setText(mAuth.getCurrentUser().getDisplayName().toString());
+
     }
 
     @Override
@@ -61,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
@@ -84,10 +105,9 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
         if (id == R.id.nav_dashboard) {
-            Dashboard dashboard = new Dashboard();
-            dashboard.setFragmentCommunicator(this);
-            changeFragment(dashboard);
+            // Handle the dashboard action
         }else if (id == R.id.nav_budget) {
 
         }else if (id == R.id.nav_category) {
@@ -96,20 +116,10 @@ public class MainActivity extends AppCompatActivity implements FragmentCommunica
             changeFragment(new AccountSourceFragment());
         }else if (id == R.id.nav_friends) {
 
-        }else if (id == R.id.nav_history) {
-
-        }if (id == R.id.nav_camera) {
-
-        }else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        }else if (id == R.id.nav_signout) {
+            mAuth.signOut();
+            Intent intent = new Intent(this, SigninActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.activity_main_drawer_layout);

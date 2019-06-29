@@ -1,6 +1,8 @@
 package com.example.jaibapp.CategoryIncomeExpense.Fragment;
 
 
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.view.ViewGroup;
 
 
 import com.example.jaibapp.CategoryIncomeExpense.Adapter.CategoryIncomeExpensePagerAdapter;
+import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.CategoryIncomeExpense.ViewModel.CategoryIncomeExpenseViewModel;
 import com.example.jaibapp.R;
 
@@ -50,6 +53,7 @@ public class CategoryIncomeExpenseFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(CategoryIncomeExpenseViewModel.class);
+
         // TODO: Use the ViewModel
 
 

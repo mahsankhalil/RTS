@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#4CAF50</color>
     <color name="colorAccent">#27BB4E</color>
     <color name="black_overlay">#4CAF50</color>
+    <color name="gradientStart">#684bd0</color>
+    <color name="gradientEnd">#6142af</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="errorColor">#dc143c</color>
+
 </resources>

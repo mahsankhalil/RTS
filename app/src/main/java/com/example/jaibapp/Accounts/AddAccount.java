@@ -61,11 +61,11 @@ public class AddAccount extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        if(intent.hasExtra("ID"))
+        if(intent.hasExtra("KEY"))
         {
             String title = intent.getStringExtra("TITLE");
             Double currency = intent.getDoubleExtra("CURRENCY",0);
-            Integer id = intent.getIntExtra("ID",0);
+            String key = intent.getStringExtra("KEY");
             Integer position = intent.getIntExtra("POSITION",0);
             mAccountName.setText(title);
             mOpeningBalance.setText(currency.toString());
@@ -74,11 +74,13 @@ public class AddAccount extends AppCompatActivity {
 
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_account_menu,menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -89,7 +91,7 @@ public class AddAccount extends AppCompatActivity {
                 String title = mAccountName.getText().toString();
                 Double currency =  Double.parseDouble(mOpeningBalance.getText().toString());
 
-                AccountListModel model = new AccountListModel(title,mSelectedImageId,currency,"-1");
+                AccountListModel model = new AccountListModel(title,mSelectedImageId,currency,"");
                 if(title.isEmpty() || currency<0)
                 {
                     Toast.makeText(mContext,"Information is Not Complete",Toast.LENGTH_SHORT).show();
@@ -99,11 +101,11 @@ public class AddAccount extends AppCompatActivity {
                     intent.putExtra("title", title);
                     intent.putExtra("currency", currency);
                     intent.putExtra("pictureId", mSelectedImageId);
-                    if (intent.hasExtra("ID"))
+                    if (intent.hasExtra("KEY"))
                     {
-                        String id = intent.getStringExtra("ID");
+                        String key = intent.getStringExtra("KEY");
                         int Position = intent.getIntExtra("POSITION",0);
-                        intent.putExtra("ID",id);
+                        intent.putExtra("KEY",key);
                         intent.putExtra("POSITION",Position);
                     }
                     setResult(RESULT_OK,intent);

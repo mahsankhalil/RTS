@@ -2,16 +2,27 @@ package com.example.jaibapp.Repository.CategoryIncomeExpense;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewModel;
 import com.example.jaibapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CategoryExpenseRepository extends IncomeExpenseViewModel {
+
     private MutableLiveData<List<CategoryItem>> data = null;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference myRef = database.getReference().child("ExpenseCategories");
+
     @Override
     public MutableLiveData<List<CategoryItem>> getAllData() {
 
@@ -19,41 +30,63 @@ public class CategoryExpenseRepository extends IncomeExpenseViewModel {
         {
             data = new MutableLiveData<>();
             List<CategoryItem> expenseList = new ArrayList<>();
-            expenseList.add(new CategoryItem("Salary", R.drawable.ic_menu_dashboard,"1"));
-            expenseList.add(new CategoryItem("Salary", R.drawable.ic_menu_dashboard,"2"));
-            expenseList.add(new CategoryItem("Investment", R.drawable.ic_menu_dashboard,"3"));
-            expenseList.add(new CategoryItem("Commission", R.drawable.ic_menu_dashboard,"4"));
-            expenseList.add(new CategoryItem("Other Income", R.drawable.ic_menu_dashboard,"5"));
-            expenseList.add(new CategoryItem("Pocket Money", R.drawable.ic_menu_dashboard,"6"));
+
             data.setValue(expenseList);
         }
+
+            myRef.addValueEventListener(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Log.d("Firebase", "collectCategories: help");
+                    if(dataSnapshot.exists())
+                        collectExpenseCategories(((Map<String,Object>) dataSnapshot.getValue()));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Failed to read value
+                    Log.d("Firebase", "Failed to read value.", databaseError.toException());
+                }
+            });
+
 
         return data;
     }
 
-    @Override
-    public void Insert(@NonNull CategoryItem categoryItem) {
-        List<CategoryItem> temp = data.getValue() ;
-        temp.add(categoryItem);
-        data.setValue(temp);
-    }
+    private void collectExpenseCategories(Map<String,Object> categories) {
 
-    @Override
-    public CategoryItem getAt(int i) {
-        if(data!=null && data.getValue()!=null && i>=0 && i<data.getValue().size())
-            return data.getValue().get(i);
-        return null;
-    }
+        ArrayList<CategoryItem> categoryItems = new ArrayList<>();
 
-    @Override
-    public CategoryItem getCategoryByID(String id) {
-        this.getAllData();
-        List<CategoryItem> list = data.getValue();
-        for(int i =0;i<list.size();i++)
-        {
-            if(list.get(i).getId().compareTo(id)==0)
-                return list.get(i);
+
+        for (Map.Entry<String, Object> entry : categories.entrySet()){
+
+            Map categoryItem = (Map) entry.getValue();
+
+            categoryItems.add(new CategoryItem(categoryItem.get("title").toString(),(int)(long)categoryItem.get("pictureId")));
         }
-        return null;
+        data.setValue(categoryItems);
+
+    }
+
+    @Override
+    public void Insert(@NonNull final CategoryItem categoryItem) {
+        myRef.orderByChild("title").equalTo(categoryItem.getTitle()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    Log.d("Firebase", "Already Exists");
+                } else {
+                    dataSnapshot.getRef().push()
+                            .setValue(categoryItem);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("Firebase", "Failed to read value.", databaseError.toException());
+            }
+        });
+
     }
 }

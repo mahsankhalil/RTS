@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.SignupActivity">
+    <ImageView
+        android:clickable="true"
+        android:id="@+id/signup_btnClose"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_close_black_24dp"/>
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/signup_logo"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginVertical="15dp"
+            android:src="@drawable/ic_launcher_192"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_color"
+            android:paddingHorizontal="20dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Signup Here!"
+                android:textSize="20dp"
+                android:fontFamily="@font/segoeui"
+                android:textAlignment="center"/>
+
+
+            <LinearLayout
+                android:background="@drawable/textbox_color"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginHorizontal="7dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icons8_user_male_circle_32px"/>
+            <EditText
+                android:id="@+id/signup_txtFullname"
+                android:hint="Full Name"
+                android:paddingVertical="15dp"
+                android:paddingRight="13dp"
+                android:textSize="15dp"
+                android:inputType="textPersonName"
+                android:background="@null"
+                android:fontFamily="@font/segoeui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="@drawable/textbox_color"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginHorizontal="7dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icons8_filled_message_32px"/>
+                <EditText
+                    android:id="@+id/signup_txtEmail"
+                    android:hint="someone@email.com"
+                    android:paddingVertical="15dp"
+                    android:paddingRight="13dp"
+                    android:textSize="15dp"
+                    android:inputType="textEmailAddress"
+                    android:background="@null"
+                    android:fontFamily="@font/segoeui"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:background="@drawable/textbox_color"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginHorizontal="7dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icons8_phone_32px"/>
+                <EditText
+                    android:id="@+id/signup_txtPhoneNo"
+                    android:hint="Phone No."
+                    android:paddingVertical="15dp"
+                    android:paddingRight="13dp"
+                    android:textSize="15dp"
+                    android:inputType="phone"
+                    android:digits="0123456789+"
+                    android:background="@null"
+                    android:fontFamily="@font/segoeui"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:background="@drawable/textbox_color"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginHorizontal="7dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icons8_password_32px"/>
+            <EditText
+                android:id="@+id/signup_txtPassword"
+                android:hint="Password"
+                android:textSize="15dp"
+                android:paddingVertical="15dp"
+                android:paddingRight="13dp"
+                android:inputType="textPassword"
+                android:layout_below="@+id/signup_number"
+                android:background="@null"
+                android:fontFamily="@font/segoeui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:background="@drawable/textbox_color"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginHorizontal="7dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icons8_password_check_32px"/>
+            <EditText
+                android:id="@+id/signup_txtConfirmPassword"
+                android:hint="Confirm Password"
+                android:textSize="15dp"
+                android:paddingVertical="15dp"
+                android:paddingRight="13dp"
+                android:inputType="textPassword"
+                android:background="@null"
+                android:fontFamily="@font/segoeui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/signup_btnRegister"
+                android:text="Register"
+                android:textSize="20dp"
+                android:layout_marginTop="15dp"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:background="@drawable/button_color"
+                android:fontFamily="@font/segoeui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
