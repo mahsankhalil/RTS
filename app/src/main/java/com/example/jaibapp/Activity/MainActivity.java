@@ -21,10 +21,11 @@ import com.example.jaibapp.Accounts.Fragments.AccountSourceFragment;
 import com.example.jaibapp.CategoryIncomeExpense.Fragment.CategoryIncomeExpenseFragment;
 import com.example.jaibapp.Dashboard.Dashboard;
 import com.example.jaibapp.R;
+import com.example.jaibapp.Utilities.FragmentCommunicator;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentCommunicator {
     private FirebaseAuth mAuth;
     private Toolbar toolbar;
     TextView profileName;
@@ -40,9 +41,9 @@ public class MainActivity extends AppCompatActivity
          toolbar = findViewById(R.id.app_bar_main_toolbar);
         setSupportActionBar(toolbar);
 
-        Fragment categoryIncomeExpenseFragment = new CategoryIncomeExpenseFragment();
+
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.main_fragment,categoryIncomeExpenseFragment)
+                .add(R.id.main_fragment,new Dashboard())
                 .addToBackStack(null)
                 .commit();
 

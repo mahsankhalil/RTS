@@ -5,6 +5,12 @@ public class CategoryItem {
     private int pictureId;
     String id;
 
+    public CategoryItem(String title, int pictureId) {
+        this.title = title;
+        this.pictureId = pictureId;
+        this.id = id;
+    }
+
     public CategoryItem(String title, int pictureId,String id) {
         this.title = title;
         this.pictureId = pictureId;

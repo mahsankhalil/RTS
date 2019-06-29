@@ -71,7 +71,7 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
             public void onClick(View v) {
                 String title = holder.mItemTitle.getText().toString();
                 Double currency = Double.parseDouble(holder.mCurrentMoney.getText().toString());
-                int id = ItemList.get(holder.getAdapterPosition()).getId();
+                String id = ItemList.get(holder.getAdapterPosition()).getKey();
                 mCallback.onHandleSelection(title,currency,holder.getAdapterPosition(),id);
 
             }
@@ -94,7 +94,7 @@ public class AccountSourceRecyclerAdapter  extends RecyclerView.Adapter<AccountS
                             case R.id.account_menu_list_edit:
                                 String title = holder.mItemTitle.getText().toString();
                                 Double currency = Double.parseDouble(holder.mCurrentMoney.getText().toString());
-                                int id = ItemList.get(holder.getAdapterPosition()).getId();
+                                String id = ItemList.get(holder.getAdapterPosition()).getKey();
                                 mCallback.onHandleSelection(title,currency,holder.getAdapterPosition(),id);
                                 return true;
                             case R.id.account_menu_list_unpin:

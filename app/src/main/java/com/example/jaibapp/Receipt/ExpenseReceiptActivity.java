@@ -189,7 +189,7 @@ public class ExpenseReceiptActivity extends AppCompatActivity  {
                 String description = mDescription.getText().toString();
                 AccountListModel accountModel = mAccountViewModel.getAt(mAccountPosition);
                 CategoryItem categoryItem = mCategoryIncomeExpenseViewModel.getAt(mCategoryPosition);
-                String accountId = accountModel.getId();
+                String accountId = accountModel.getKey();
                 String categoryId = categoryItem.getId();
                 Intent intent = getIntent();
                 if(intent.hasExtra("ID"))
