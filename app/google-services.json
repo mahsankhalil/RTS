@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "74899644480",
+    "firebase_url": "https://jaibapp-225de.firebaseio.com",
+    "project_id": "jaibapp-225de",
+    "storage_bucket": "jaibapp-225de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74899644480:android:f060eca5ba648aca",
+        "android_client_info": {
+          "package_name": "com.example.jaibapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74899644480-gvj87r9qrcso5h0tkco6akmm2kq9cem1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jaibapp",
+            "certificate_hash": "129f7de1c412f54ed785d1ec1128bf7f976c76b7"
+          }
+        },
+        {
+          "client_id": "74899644480-dbnso8bovq971o4n0qbpe9g331p29c03.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrvhTey5PCuyqGwCGb_K2n-lU9E0dAumA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74899644480-dbnso8bovq971o4n0qbpe9g331p29c03.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
