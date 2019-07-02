@@ -5,6 +5,7 @@ public class AccountListModel {
     private int PictureId;
     private Double CurrentCurrency;
     private String key;
+    private String Uid;
 
 
     public AccountListModel(String title, int pictureId, Double currentCurrency, String key) {
@@ -48,4 +49,12 @@ public class AccountListModel {
     public void setCurrentCurrency(Double currentCurrency) {
         CurrentCurrency = currentCurrency;
     }
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
+    }
+
 }

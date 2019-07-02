@@ -1,16 +1,12 @@
 package com.example.jaibapp.Repository.CategoryIncomeExpense;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewModel;
-import com.example.jaibapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,7 +14,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +25,7 @@ public class CategoryIncomeRepository extends IncomeExpenseViewModel {
     private DatabaseReference myRef = database.getReference().child("IncomeCategories");
 
     @Override
-    public MutableLiveData<List<CategoryItem>> getAllData() {
+    public MutableLiveData<List<CategoryItem>> getAll() {
 
         if(data==null)
         {
@@ -40,7 +35,8 @@ public class CategoryIncomeRepository extends IncomeExpenseViewModel {
             data.setValue(incomeList);
         }
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.orderByChild("uid").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -80,8 +76,10 @@ public class CategoryIncomeRepository extends IncomeExpenseViewModel {
                 if(dataSnapshot.exists()) {
                     Log.d("Firebase", "Already Exists");
                 } else {
-                    dataSnapshot.getRef().push()
-                    .setValue(categoryItem);
+                    String key = myRef.push().getKey();
+                    categoryItem.setId(key);
+                    myRef.child(key)
+                            .setValue(categoryItem);
                 }
 
             }
@@ -99,15 +97,26 @@ public class CategoryIncomeRepository extends IncomeExpenseViewModel {
             return data.getValue().get(i);
         return null;
     }
+
+    @Override
+    public Map<String, Object> getMap() {
+        return null;
+    }
+
     @Override
     public CategoryItem getCategoryByID(String id) {
-        this.getAllData();
+        this.getAll();
         List<CategoryItem> list = data.getValue();
         for(int i =0;i<list.size();i++)
         {
             if(list.get(i).getId().compareTo(id)==0)
                 return list.get(i);
         }
+        return null;
+    }
+
+    @Override
+    public CategoryItem parse(Map<String, Object> categoryItem) {
         return null;
     }
 }

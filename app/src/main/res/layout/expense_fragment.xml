@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CategoryIncomeExpense.TabFragments.ExpenseFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".CategoryIncomeExpense.TabFragments.ExpenseFragment">
+    android:padding="5dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/category_income_expense_fragment_recycler_view"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/category_income_expense_list_item"
-        />
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/category_income_expense_fragment_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/category_income_expense_list_item" />
+
+    </LinearLayout>
+
     <android.support.design.widget.FloatingActionButton
+        android:background="#FFF"
         android:id="@+id/category_expense_add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:src="@drawable/ic_add_black_24dp" />
 </android.support.design.widget.CoordinatorLayout>

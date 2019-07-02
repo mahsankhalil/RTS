@@ -87,7 +87,7 @@ public class IncomeReceiptActivity  extends AppCompatActivity {
         mCategoryIncomeExpenseViewModel = ViewModelProviders.of(this).get(CategoryIncomeRepository.class);
 
 
-        List<CategoryItem> categoryItems = mCategoryIncomeExpenseViewModel.getAllData().getValue();
+        List<CategoryItem> categoryItems = mCategoryIncomeExpenseViewModel.getAll().getValue();
         List<AccountListModel> accountListModels = mAccountViewModel.getAll().getValue();
 
         mAccountSpinnerAdapter = new AccountSpinnerAdapter(getApplicationContext(),accountListModels);

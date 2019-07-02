@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jaibapp.Accounts.DTO.AccountListModel;
 import com.example.jaibapp.R;
@@ -24,6 +25,10 @@ public class AccountSpinnerAdapter  extends BaseAdapter {
         this.mContext = mContext;
         this.mData = mData;
         mLayoutInflator = LayoutInflater.from(mContext);
+    }
+
+    public void setData(List<AccountListModel> mData) {
+        this.mData = mData;
     }
 
     @Override
@@ -45,14 +50,15 @@ public class AccountSpinnerAdapter  extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view==null)
             view = mLayoutInflator.inflate(R.layout.add_receipt_account_item_list,viewGroup,false);
+
         ImageView img = view.findViewById(R.id.add_receipt_account_list_item_image);
         TextView txt = view.findViewById(R.id.add_receipt_account_list_item_currency);
         TextView title = view.findViewById(R.id.add_receipt_account_list_item_title);
 
-
         txt.setText(mData.get(i).getCurrentCurrency().toString());
         img.setImageResource(ImageArray.mThumbIds[i]);
         title.setText(mData.get(i).getTitle());
+        Toast.makeText(mContext, "Account Spinner", Toast.LENGTH_LONG).show();
         return view;
     }
 }

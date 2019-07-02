@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -130,6 +131,8 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
                 mExpenseTotal.setText(sum.toString());
                 mExpenseTotalList.setText(sum.toString());
                 mExpenseReceiptAdapter.setData(receiptModels);
+                Log.d("Receipt", "onChanged: " + receiptModels.size());
+                mExpenseReceiptAdapter.notifyDataSetChanged();
             }
         });
 
@@ -142,12 +145,9 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
                 mIncomeTotal.setText(sum.toString());
                 mIncomeTotalList.setText(sum.toString());
                 mIncomeReceiptAdapter.setData(receiptModels);
+                Log.d("Receipt", "onChanged: " + receiptModels);
             }
         });
-
-
-
-
 
 
         floatingActionButton = view.findViewById(R.id.dashboard_add_expense_button);
@@ -212,10 +212,6 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
         mExpenseRecyclerView.setLayoutManager(layoutManager1);
 
 
-
-
-
-
         return view;
     }
 
@@ -251,6 +247,7 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
             else
             {
                 String categoryId = data.getStringExtra("CATEGORY_ID");
+                Log.e("Cap L", "onActivityResult: "+categoryId );
                 String accountId = data.getStringExtra("ACCOUNT_ID");
                 Double expenseAmount = data.getDoubleExtra("EXPENSE_AMOUNT",0.0);
                 String selectedDate = data.getStringExtra("SELECTED_DATE");
@@ -282,12 +279,13 @@ public class Dashboard extends Fragment implements AccountRecyclerAdapter.CallBa
     }
 
     @Override
-    public CategoryItem getCategoryItem(String id,int Mode) {
+    public CategoryItem getCategoryItem(String id,int Mode) throws Exception {
         IncomeExpenseViewModel viewModel;
         if(Mode == ReceiptAdapter.INCOME)
             viewModel = ViewModelProviders.of(this).get(CategoryIncomeRepository.class);
         else
             viewModel = ViewModelProviders.of(this).get(CategoryExpenseRepository.class);
+        Log.e("Oush", "getCategoryItem: " + id );
         return viewModel.getCategoryByID(id);
     }
 

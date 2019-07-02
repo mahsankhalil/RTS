@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    >
+    android:background="#EEEEEE"
+    android:padding="5dp">
 
-    <TextView
-        android:id="@+id/monthly_budget_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Category to Set Monthly Budget"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:layout_marginBottom="10dp"
-        />
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/monthly_budget_recycler_list"
-        tools:listitem="@layout/monthly_budget_list_item"
-        >
-    </android.support.v7.widget.RecyclerView>
+        android:orientation="vertical">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/monthly_budget_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="My Budget"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/monthly_budget_recycler_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/monthly_budget_list_item">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/budget_add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add_black_24dp" />
+
+</android.support.design.widget.CoordinatorLayout>
+

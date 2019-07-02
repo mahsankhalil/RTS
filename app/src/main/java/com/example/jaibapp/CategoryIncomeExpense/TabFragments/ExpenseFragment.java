@@ -1,7 +1,6 @@
 package com.example.jaibapp.CategoryIncomeExpense.TabFragments;
 
 import android.app.Dialog;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -23,7 +22,6 @@ import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewModel;
 import com.example.jaibapp.R;
 import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryExpenseRepository;
-import com.example.jaibapp.Repository.CategoryIncomeExpense.CategoryIncomeRepository;
 
 import java.util.List;
 
@@ -67,9 +65,9 @@ public class ExpenseFragment extends Fragment {
         final View view  = getActivity().getLayoutInflater().inflate(R.layout.category_expense_income_add_item_dailog, null);
         dialog.setContentView(view);
         TextView deleteButton = view.findViewById(R.id.category_expense_income_add_item_dialog_item_delete);
-        TextView saveButton = view.findViewById(R.id.category_expense_income_add_item_dialog_item_save);
-        TextView cancelButton = view.findViewById(R.id.category_expense_income_add_item_dialog_item_cancel);
-        TextView title = view.findViewById(R.id.category_expense_income_add_item_dialog_title);
+        TextView saveButton = view.findViewById(R.id.save_update_budget);
+        TextView cancelButton = view.findViewById(R.id.cancel_budget_update);
+        TextView title = view.findViewById(R.id.update_budget);
         title.setText("Add Expense Item");
 
         deleteButton.setVisibility(View.GONE);
@@ -77,10 +75,10 @@ public class ExpenseFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText title = view.findViewById(R.id.category_expense_income_add_item_dialog_item_name);
+                EditText title = view.findViewById(R.id.budget_amount);
                 String t = title.getText().toString();
                 mViewModel.Insert(new CategoryItem(t,R.drawable.ic_menu_budget,"-1"));
-                adapter.setValue(mViewModel.getAllData().getValue());
+                adapter.setValue(mViewModel.getAll().getValue());
                 Toast.makeText(getActivity(),"Save",Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
@@ -103,14 +101,14 @@ public class ExpenseFragment extends Fragment {
 
         mViewModel = ViewModelProviders.of(this).get(CategoryExpenseRepository.class);
         // TODO: Use the ViewModel
-        mViewModel.getAllData().observe(this, new Observer<List<CategoryItem>>() {
+        mViewModel.getAll().observe(this, new Observer<List<CategoryItem>>() {
             @Override
             public void onChanged(@Nullable List<CategoryItem> categoryItems) {
                 adapter.setValue(categoryItems);
             }
         });
 
-        adapter.setValue(mViewModel.getAllData().getValue());
+        adapter.setValue(mViewModel.getAll().getValue());
     }
 
 }

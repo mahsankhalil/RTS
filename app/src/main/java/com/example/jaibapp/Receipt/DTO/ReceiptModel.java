@@ -8,6 +8,10 @@ public class ReceiptModel {
     private String mDate;
     private String mTags ;
     private String mDescription;
+
+
+
+    private String Uid;
     public ReceiptModel(String ID, String mCategoryID, String mAccountID, Double mReceiptAmount, String mDate, String mTags, String mDescription) {
         this.ID = ID;
         this.mCategoryID = mCategoryID;
@@ -72,5 +76,13 @@ public class ReceiptModel {
 
     public void setDescription(String mDescription) {
         this.mDescription = mDescription;
+    }
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
     }
 }

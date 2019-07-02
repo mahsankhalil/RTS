@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.SigninActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+        <activity android:name=".Budget.SetBudget"
+            android:label="Add Budget"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activity.SigninActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Activity.SignupActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -37,21 +37,15 @@
         <activity
             android:name=".Accounts.AddAccount"
             android:label="Add Account"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Receipt.ExpenseReceiptActivity"
             android:label="Add Expense"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Receipt.IncomeReceiptActivity"
             android:label="Add Income"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

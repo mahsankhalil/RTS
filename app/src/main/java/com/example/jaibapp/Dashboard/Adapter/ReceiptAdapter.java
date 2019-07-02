@@ -3,6 +3,7 @@ package com.example.jaibapp.Dashboard.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.Holder> 
     }
 
     public interface ReceiptCommunicator{
-        CategoryItem getCategoryItem(String id,int mode);
+        CategoryItem getCategoryItem(String id,int mode) throws Exception;
         AccountListModel getAccountItem(String id);
     }
 
@@ -66,12 +67,21 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.Holder> 
 
         holder.mDay.setText(day);
         holder.mMonth.setText(month);
-        CategoryItem categoryItem = communicator.getCategoryItem(mData.get(holder.getAdapterPosition()).getCategoryID(),getCURRENT_MODE());
+        CategoryItem categoryItem = null;
+        try {
+            Log.e("Lush", "onBindViewHolder: "+mData.get(holder.getAdapterPosition()).getCategoryID() );
+            categoryItem = communicator.getCategoryItem(mData.get(holder.getAdapterPosition()).getCategoryID(),getCURRENT_MODE());
+            Log.e("Push", "onBindViewHolder: "+categoryItem );
+            holder.mCategoryName.setText(categoryItem.getTitle());
+        } catch (Exception e) {
+            holder.mCategoryName.setText("MyNull");
+            e.printStackTrace();
+        }
         AccountListModel accountListModel = communicator.getAccountItem(mData.get(holder.getAdapterPosition()).getAccountID());
-        holder.mAccountName.setText(accountListModel.getTitle());
-        holder.mCategoryName.setText(categoryItem.getTitle());
+        if(accountListModel != null) {
+            holder.mAccountName.setText(accountListModel.getTitle());
+        }
         holder.mReceiptBalance.setText(mData.get(i).getReceiptAmount().toString());
-
 
     }
 

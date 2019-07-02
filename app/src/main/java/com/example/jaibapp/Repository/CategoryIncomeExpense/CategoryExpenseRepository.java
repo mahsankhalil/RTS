@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.CategoryIncomeExpense.ViewModel.IncomeExpenseViewModel;
-import com.example.jaibapp.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,12 +19,13 @@ import java.util.Map;
 
 public class CategoryExpenseRepository extends IncomeExpenseViewModel {
 
+    private Map<String, Object> map;
     private MutableLiveData<List<CategoryItem>> data = null;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference().child("ExpenseCategories");
 
     @Override
-    public MutableLiveData<List<CategoryItem>> getAllData() {
+    public MutableLiveData<List<CategoryItem>> getAll() {
 
         if(data == null)
         {
@@ -34,13 +35,16 @@ public class CategoryExpenseRepository extends IncomeExpenseViewModel {
             data.setValue(expenseList);
         }
 
-            myRef.addValueEventListener(new ValueEventListener() {
+        myRef.orderByChild("uid").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .addValueEventListener(new ValueEventListener() {
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Log.d("Firebase", "collectCategories: help");
-                    if(dataSnapshot.exists())
+                    if(dataSnapshot.exists()){
                         collectExpenseCategories(((Map<String,Object>) dataSnapshot.getValue()));
+                        map = (Map<String,Object>) dataSnapshot.getValue();
+                    }
                 }
 
                 @Override
@@ -62,13 +66,22 @@ public class CategoryExpenseRepository extends IncomeExpenseViewModel {
         for (Map.Entry<String, Object> entry : categories.entrySet()){
 
             Map categoryItem = (Map) entry.getValue();
-
-            categoryItems.add(new CategoryItem(categoryItem.get("title").toString(),(int)(long)categoryItem.get("pictureId")));
+            categoryItems.add(parse(categoryItem));
         }
         data.setValue(categoryItems);
 
     }
 
+    @Override
+    public CategoryItem parse(Map<String, Object> categoryItem){
+
+        CategoryItem categoryItem1 = new CategoryItem(
+                categoryItem.get("title").toString(),
+                (int)(long)categoryItem.get("pictureId"),
+                categoryItem.get("id").toString());
+        return categoryItem1;
+
+    }
     @Override
     public void Insert(@NonNull final CategoryItem categoryItem) {
         myRef.orderByChild("title").equalTo(categoryItem.getTitle()).addValueEventListener(new ValueEventListener() {
@@ -77,7 +90,10 @@ public class CategoryExpenseRepository extends IncomeExpenseViewModel {
                 if(dataSnapshot.exists()) {
                     Log.d("Firebase", "Already Exists");
                 } else {
-                    dataSnapshot.getRef().push()
+                    String key = myRef.push().getKey();
+                    categoryItem.setId(key);
+                    categoryItem.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    myRef.child(key)
                             .setValue(categoryItem);
                 }
             }
@@ -98,14 +114,19 @@ public class CategoryExpenseRepository extends IncomeExpenseViewModel {
     }
 
     @Override
-    public CategoryItem getCategoryByID(String id) {
-        this.getAllData();
+    public CategoryItem getCategoryByID(String id) throws Exception {
+        this.getAll();
         List<CategoryItem> list = data.getValue();
+
         for(int i =0;i<list.size();i++)
         {
             if(list.get(i).getId().compareTo(id)==0)
                 return list.get(i);
         }
         return null;
+    }
+    @Override
+    public Map<String, Object> getMap() {
+        return map;
     }
 }

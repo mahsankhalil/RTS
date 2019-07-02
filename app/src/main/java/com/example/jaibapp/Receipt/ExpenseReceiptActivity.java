@@ -1,6 +1,7 @@
 package com.example.jaibapp.Receipt;
 
 import android.app.DatePickerDialog;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,9 +75,6 @@ public class ExpenseReceiptActivity extends AppCompatActivity  {
 
         mContext = getApplicationContext();
 
-
-
-
         mLocaleCurrency = findViewById(R.id.add_receipt_currency);
         mLocaleCurrency.setText(mLocalCurrencyStr);
 
@@ -90,12 +89,29 @@ public class ExpenseReceiptActivity extends AppCompatActivity  {
         mAccountViewModel = ViewModelProviders.of(this).get(AccountRepository.class);
         mCategoryIncomeExpenseViewModel = ViewModelProviders.of(this).get(CategoryExpenseRepository.class);
 
-
-        List<CategoryItem> categoryItems = mCategoryIncomeExpenseViewModel.getAllData().getValue();
+        List<CategoryItem> categoryItems = mCategoryIncomeExpenseViewModel.getAll().getValue();
         List<AccountListModel> accountListModels = mAccountViewModel.getAll().getValue();
 
         mAccountSpinnerAdapter = new AccountSpinnerAdapter(getApplicationContext(),accountListModels);
         mCategorySpinnerAdapter = new CategorySpinnerAdapter(getApplicationContext(),categoryItems);
+
+        mCategoryIncomeExpenseViewModel.getAll().observe(this, new Observer<List<CategoryItem>>() {
+            @Override
+            public void onChanged(@Nullable List<CategoryItem> categoryItemList) {
+                mCategorySpinnerAdapter.setData(categoryItemList);
+                mCategorySpinnerAdapter.notifyDataSetChanged();
+            }
+        });
+
+        mAccountViewModel.getAll().observe(this, new Observer<List<AccountListModel>>() {
+            @Override
+            public void onChanged(@Nullable List<AccountListModel> accountListModels) {
+                mAccountSpinnerAdapter.setData(accountListModels);
+                mAccountSpinnerAdapter.notifyDataSetChanged();
+            }
+        });
+
+
 
         mAccountSpinner.setAdapter(mAccountSpinnerAdapter);
         mCategorySpinner.setAdapter(mCategorySpinnerAdapter);
@@ -189,6 +205,7 @@ public class ExpenseReceiptActivity extends AppCompatActivity  {
                 String description = mDescription.getText().toString();
                 AccountListModel accountModel = mAccountViewModel.getAt(mAccountPosition);
                 CategoryItem categoryItem = mCategoryIncomeExpenseViewModel.getAt(mCategoryPosition);
+                Log.e("Capital Lanat", "onOptionsItemSelected: " + categoryItem.getId() );
                 String accountId = accountModel.getKey();
                 String categoryId = categoryItem.getId();
                 Intent intent = getIntent();

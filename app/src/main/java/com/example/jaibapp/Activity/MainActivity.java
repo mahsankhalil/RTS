@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.jaibapp.Accounts.Fragments.AccountSourceFragment;
+import com.example.jaibapp.Budget.Fragments.BudgetFragment;
 import com.example.jaibapp.CategoryIncomeExpense.Fragment.CategoryIncomeExpenseFragment;
 import com.example.jaibapp.Dashboard.Dashboard;
 import com.example.jaibapp.R;
@@ -108,9 +109,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_dashboard) {
-            // Handle the dashboard action
+            changeFragment(new Dashboard());
         }else if (id == R.id.nav_budget) {
 
+            changeFragment(new BudgetFragment());
         }else if (id == R.id.nav_category) {
             changeFragment(new CategoryIncomeExpenseFragment());
         }else if (id == R.id.nav_account) {

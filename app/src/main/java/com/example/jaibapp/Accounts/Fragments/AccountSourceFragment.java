@@ -26,13 +26,16 @@ import com.example.jaibapp.Accounts.AddAccount;
 import com.example.jaibapp.Accounts.ViewModel.AccountViewModel;
 import com.example.jaibapp.R;
 import com.example.jaibapp.Repository.Accounts.AccountRepository;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
 public class AccountSourceFragment extends Fragment implements AccountSourceRecyclerAdapter.CallbackInterface {
+
     private AccountViewModel mAccountViewModel;
+
     public static AccountSourceFragment newInstance() {
         return new AccountSourceFragment();
     }
@@ -54,6 +57,7 @@ public class AccountSourceFragment extends Fragment implements AccountSourceRecy
             Double currency = data.getDoubleExtra("currency",0);
             Log.d("curr", "onActivityResult: Currency" + currency);
             AccountListModel listModel = new AccountListModel(title,pictureId,currency,"");
+            listModel.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
             mAccountViewModel.AddAccount(listModel);
         } else if(resultCode == RESULT_OK && requestCode == EditIntentRequestCode && data.hasExtra("KEY")) {
             Toast.makeText(getContext(),"EDITED",Toast.LENGTH_SHORT).show();

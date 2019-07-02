@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/add_budget_main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
     <!--<android.support.v7.widget.Toolbar-->
         <!--android:id="@+id/set_budget_toolbar"-->
@@ -21,45 +38,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:paddingLeft="10dp"
-                android:paddingStart="10dp"
-                android:paddingBottom="5dp">
-
-                <ImageView
-                    android:id="@+id/set_budget_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_add"
-                    android:layout_alignBottom="@id/set_budget_category"
-                    android:layout_alignTop="@id/set_budget_category"
-                    />
+                android:orientation="vertical"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="13dp">
                 <TextView
-                    android:id="@+id/set_budget_category"
+                    android:id="@+id/add_budget_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Category"
-                    android:textSize="20dp"
-                    android:fontFamily="@font/segoeui"
-                    android:textStyle="bold"
-                    android:layout_toEndOf="@+id/set_budget_image"
-                    android:layout_toRightOf="@id/set_budget_image"
+                    android:layout_centerVertical="true"
+                    android:hint="Select Category"
                     android:paddingLeft="5dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <Spinner
+                    android:layout_below="@id/add_budget_category"
+                    android:id="@+id/add_receipt_category_spinner"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:textSize="17sp"
-                    android:layout_below="@+id/set_budget_image"
-                    android:text="No budget defined for this month"
-                    android:fontFamily="@font/segoeui"
-                    android:layout_marginTop="5dp"/>
-            </RelativeLayout>
+                    tools:listitem="@layout/add_receipt_catogory_item_list"/>
+            </LinearLayout>
+
 
         </android.support.v7.widget.CardView>
 
@@ -87,7 +88,7 @@
                 <EditText
                     android:inputType="number"
                     android:textDirection="rtl"
-                    android:id="@+id/add_receipt_amount"
+                    android:id="@+id/set_budget_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="0"

@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/category_expense_income_add_item_dialog_title"
+        android:id="@+id/update_budget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/category_expense_income_add_item_dialog_item_name"
+        android:id="@+id/budget_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -39,26 +39,26 @@
         android:textSize="@dimen/title_font_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/category_expense_income_add_item_dialog_title" />
+        app:layout_constraintTop_toBottomOf="@+id/update_budget" />
 
     <TextView
-        android:id="@+id/select_image"
+        android:id="@+id/budget_category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SELECT PICTURE"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/category_expense_income_add_item_dialog_item_image"
-        app:layout_constraintStart_toStartOf="@+id/category_expense_income_add_item_dialog_item_name"
-        app:layout_constraintTop_toTopOf="@+id/category_expense_income_add_item_dialog_item_image" />
+        app:layout_constraintBottom_toBottomOf="@+id/budget_category_image"
+        app:layout_constraintStart_toStartOf="@+id/budget_amount"
+        app:layout_constraintTop_toTopOf="@+id/budget_category_image" />
 
     <ImageView
-        android:id="@+id/category_expense_income_add_item_dialog_item_image"
+        android:id="@+id/budget_category_image"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_menu_budget"
-        app:layout_constraintEnd_toEndOf="@+id/category_expense_income_add_item_dialog_item_name"
-        app:layout_constraintTop_toBottomOf="@+id/category_expense_income_add_item_dialog_item_name" />
+        app:layout_constraintEnd_toEndOf="@+id/budget_amount"
+        app:layout_constraintTop_toBottomOf="@+id/budget_amount" />
 
     <TextView
         android:id="@+id/category_expense_income_add_item_dialog_item_delete"
@@ -69,11 +69,11 @@
         android:text="Delete"
         android:textColor="@drawable/text_view_effect"
         android:textSize="@dimen/title_font_size"
-        app:layout_constraintStart_toStartOf="@+id/select_image"
-        app:layout_constraintTop_toTopOf="@+id/category_expense_income_add_item_dialog_item_save" />
+        app:layout_constraintStart_toStartOf="@+id/budget_category_name"
+        app:layout_constraintTop_toTopOf="@+id/save_update_budget" />
 
     <TextView
-        android:id="@+id/category_expense_income_add_item_dialog_item_cancel"
+        android:id="@+id/cancel_budget_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -84,11 +84,11 @@
         android:text="Cancel"
         android:textColor="@drawable/text_view_effect"
         android:textSize="@dimen/title_font_size"
-        app:layout_constraintEnd_toEndOf="@+id/category_expense_income_add_item_dialog_item_image"
-        app:layout_constraintTop_toBottomOf="@+id/category_expense_income_add_item_dialog_item_image" />
+        app:layout_constraintEnd_toEndOf="@+id/budget_category_image"
+        app:layout_constraintTop_toBottomOf="@+id/budget_category_image" />
 
     <TextView
-        android:id="@+id/category_expense_income_add_item_dialog_item_save"
+        android:id="@+id/save_update_budget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="8dp"
@@ -97,9 +97,9 @@
         android:text="Save"
         android:textColor="@drawable/text_view_effect"
         android:textSize="@dimen/title_font_size"
-        app:layout_constraintEnd_toStartOf="@+id/category_expense_income_add_item_dialog_item_cancel"
+        app:layout_constraintEnd_toStartOf="@+id/cancel_budget_update"
         app:layout_constraintStart_toEndOf="@+id/category_expense_income_add_item_dialog_item_delete"
-        app:layout_constraintTop_toTopOf="@+id/category_expense_income_add_item_dialog_item_cancel" />
+        app:layout_constraintTop_toTopOf="@+id/cancel_budget_update" />
 
 
 </android.support.constraint.ConstraintLayout>

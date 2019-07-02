@@ -3,7 +3,8 @@ package com.example.jaibapp.CategoryIncomeExpense.DTO;
 public class CategoryItem {
     private String title;
     private int pictureId;
-    String id;
+    private String id;
+    private String Uid;
 
     public CategoryItem(String title, int pictureId) {
         this.title = title;
@@ -40,4 +41,13 @@ public class CategoryItem {
     public void setPictureId(int pictureId) {
         this.pictureId = pictureId;
     }
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
+    }
+
 }

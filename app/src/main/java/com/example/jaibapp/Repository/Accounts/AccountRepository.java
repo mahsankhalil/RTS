@@ -3,11 +3,14 @@ package com.example.jaibapp.Repository.Accounts;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.jaibapp.Accounts.DTO.AccountListModel;
 import com.example.jaibapp.Accounts.ViewModel.AccountViewModel;
 import com.example.jaibapp.CategoryIncomeExpense.DTO.CategoryItem;
 import com.example.jaibapp.R;
+import com.example.jaibapp.Receipt.ExpenseReceiptActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,11 +33,11 @@ public class AccountRepository extends AccountViewModel {
         {
             data = new MutableLiveData<>();
             List<AccountListModel> list = new ArrayList<>();
-
             data.setValue(list);
         }
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.orderByChild("uid").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -88,7 +91,7 @@ public class AccountRepository extends AccountViewModel {
                 if(dataSnapshot.exists()) {
                     Log.d("Firebase", "Already Exists");
                 } else {
-                    String key = myRef.push().getKey();;
+                    String key = myRef.push().getKey();
                     accountListModel.setKey(key);
                     myRef.child(key)
                             .setValue(accountListModel);

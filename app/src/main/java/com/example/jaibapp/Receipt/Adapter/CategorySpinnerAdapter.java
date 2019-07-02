@@ -26,6 +26,12 @@ public class CategorySpinnerAdapter  extends BaseAdapter {
         mLayoutInflator = LayoutInflater.from(mContext);
     }
 
+
+    public void setData(List<CategoryItem> mData) {
+        this.mData = mData;
+    }
+
+
     @Override
     public int getCount() {
         return mData.size();
